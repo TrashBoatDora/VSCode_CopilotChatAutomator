@@ -1,0 +1,21 @@
+2025-09-13 03:33:13,731 - HybridUIAutomation - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_033313.log
+2025-09-13 03:33:13,807 - ProjectManager - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_033313.log
+2025-09-13 03:33:13,808 - ProjectManager - INFO - 專案管理器初始化 - 根目錄: Y:\VSCode_Hybrid UI Automation Script\projects
+2025-09-13 03:33:19,452 - HybridUIAutomation - INFO - 🚀 開始處理專案: sample_project
+2025-09-13 03:33:19,454 - HybridUIAutomation - INFO - [sample_project] 開始處理專案
+2025-09-13 03:33:19,463 - HybridUIAutomation - INFO - [sample_project] 開啟 VS Code 專案
+2025-09-13 03:33:29,759 - HybridUIAutomation - INFO - [sample_project] 清除 Copilot Chat 記憶
+2025-09-13 03:33:32,807 - HybridUIAutomation - INFO - [sample_project] 處理 Copilot Chat
+2025-09-13 03:33:49,545 - HybridUIAutomation - INFO - [sample_project] 驗證處理結果
+2025-09-13 03:33:49,551 - HybridUIAutomation - INFO - [sample_project] 智能關閉專案並清除記憶
+2025-09-13 03:33:50,655 - HybridUIAutomation - INFO - [sample_project] 專案處理完成
+2025-09-13 03:33:50,678 - HybridUIAutomation - INFO - ✅ 專案處理成功: sample_project (耗時: 31.23秒)
+2025-09-13 03:33:52,693 - HybridUIAutomation - INFO - 🚀 開始處理專案: sample_project_2
+2025-09-13 03:33:52,696 - HybridUIAutomation - INFO - [sample_project_2] 開始處理專案
+2025-09-13 03:33:52,707 - HybridUIAutomation - INFO - [sample_project_2] 開啟 VS Code 專案
+2025-09-13 03:34:06,478 - HybridUIAutomation - INFO - [sample_project_2] 清除 Copilot Chat 記憶
+2025-09-13 03:34:10,799 - HybridUIAutomation - INFO - [sample_project_2] 處理 Copilot Chat
+2025-09-13 03:34:35,518 - HybridUIAutomation - INFO - [sample_project_2] 驗證處理結果
+2025-09-13 03:34:35,536 - HybridUIAutomation - INFO - [sample_project_2] 智能關閉專案並清除記憶
+2025-09-13 03:34:36,871 - HybridUIAutomation - INFO - [sample_project_2] 專案處理完成
+2025-09-13 03:34:36,885 - HybridUIAutomation - INFO - ✅ 專案處理成功: sample_project_2 (耗時: 44.21秒)

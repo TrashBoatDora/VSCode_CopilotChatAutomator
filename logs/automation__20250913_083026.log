@@ -1,0 +1,126 @@
+2025-09-13 08:30:26,294 - VSCodeUIInitializer - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,294 - VSCodeUIInitializer - INFO - VS Code UI 初始化器啟動
+2025-09-13 08:30:26,301 - VSCodeController - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,313 - VSCodeController - INFO - VS Code 控制器初始化完成，已記錄現有 VS Code PID: {9120, 668, 7176, 8040, 8968, 5356, 3884, 9100, 6992, 2644, 8276, 7576, 3580}
+2025-09-13 08:30:26,347 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,348 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-13 08:30:26,354 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,356 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-13 08:30:26,417 - ImageRecognition - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,417 - ImageRecognition - INFO - 圖像辨識模組初始化完成
+2025-09-13 08:30:26,449 - ErrorHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,450 - ErrorHandler - INFO - 錯誤處理器初始化完成
+2025-09-13 08:30:26,454 - RetryHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,454 - RetryHandler - INFO - 重試處理器初始化完成
+2025-09-13 08:30:26,464 - RecoveryManager - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,466 - RecoveryManager - INFO - 恢復管理器初始化完成
+2025-09-13 08:30:26,477 - MainController - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,484 - ProjectManager - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,484 - ProjectManager - INFO - 專案管理器初始化 - 根目錄: Y:\VSCode_Hybrid UI Automation Script\projects
+2025-09-13 08:30:26,499 - VSCodeController - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,502 - VSCodeController - INFO - VS Code 控制器初始化完成，已記錄現有 VS Code PID: {9120, 668, 7176, 8040, 8968, 5356, 3884, 9100, 6992, 2644, 8276, 7576, 3580}
+2025-09-13 08:30:26,507 - ErrorHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,507 - ErrorHandler - INFO - 錯誤處理器初始化完成
+2025-09-13 08:30:26,515 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,515 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-13 08:30:26,526 - ImageRecognition - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,529 - ImageRecognition - INFO - 圖像辨識模組初始化完成
+2025-09-13 08:30:26,537 - RetryHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,538 - RetryHandler - INFO - 重試處理器初始化完成
+2025-09-13 08:30:26,543 - RecoveryManager - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_083026.log
+2025-09-13 08:30:26,544 - RecoveryManager - INFO - 恢復管理器初始化完成
+2025-09-13 08:30:26,545 - MainController - INFO - 混合式 UI 自動化腳本初始化完成
+2025-09-13 08:30:26,545 - MainController - INFO - ========================= 開始執行自動化腳本 ========================
+2025-09-13 08:30:26,548 - MainController - INFO - 執行前置檢查...
+2025-09-13 08:30:26,561 - ImageRecognition - ERROR - 驗證圖像資源時發生錯誤: 'Config' object has no attribute 'IMAGE_RECOGNITION_REQUIRED'
+2025-09-13 08:30:26,562 - MainController - WARNING - 圖像資源驗證失敗，但繼續執行（使用替代方案）
+2025-09-13 08:30:26,563 - VSCodeController - INFO - 確保乾淨的執行環境...
+2025-09-13 08:30:26,564 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-13 08:30:29,568 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-13 08:30:29,570 - MainController - INFO - ✅ 前置檢查完成
+2025-09-13 08:30:29,571 - ProjectManager - INFO - 開始掃描專案目錄...
+2025-09-13 08:30:29,645 - ProjectManager - INFO - 掃描完成，發現 2 個專案
+2025-09-13 08:30:29,649 - ProjectManager - INFO - 專案狀態載入完成
+2025-09-13 08:30:29,650 - MainController - INFO - 總共發現 2 個專案
+2025-09-13 08:30:29,651 - ProjectManager - INFO - 待處理專案數量: 2
+2025-09-13 08:30:29,652 - MainController - INFO - 待處理專案: 2 個
+2025-09-13 08:30:29,653 - ProjectManager - INFO - 待處理專案數量: 2
+2025-09-13 08:30:29,654 - ProjectManager - INFO - 專案分為 1 批，每批最多 100 個專案
+2025-09-13 08:30:29,654 - MainController - INFO - 將分 1 批處理
+2025-09-13 08:30:29,655 - MainController - INFO - ========================= 處理第 1/1 批 ========================
+2025-09-13 08:30:29,656 - MainController - INFO - 處理專案 1/2: sample_project
+2025-09-13 08:30:29,670 - RetryHandler - INFO - 嘗試執行 專案 sample_project (第 1/3 次)
+2025-09-13 08:30:29,686 - VSCodeController - INFO - 開啟專案: Y:\VSCode_Hybrid UI Automation Script\projects\sample_project
+2025-09-13 08:30:29,688 - VSCodeController - INFO - 發現現有 VS Code 實例，正在關閉...
+2025-09-13 08:30:29,689 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-13 08:30:32,695 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-13 08:30:32,707 - VSCodeController - INFO - 等待 VS Code 載入 (5秒)...
+2025-09-13 08:30:37,711 - VSCodeController - INFO - 初始化 VS Code UI...
+2025-09-13 08:30:37,719 - VSCodeUIInitializer - INFO - ========================= 開始初始化 VS Code UI =================
+2025-09-13 08:30:37,721 - VSCodeUIInitializer - INFO - 等待 VS Code 載入完成 (5秒)
+2025-09-13 08:30:42,722 - VSCodeUIInitializer - INFO - ✅ VS Code UI 初始化完成
+2025-09-13 08:30:42,723 - VSCodeController - INFO - ✅ 專案開啟成功: sample_project
+2025-09-13 08:30:42,725 - VSCodeController - INFO - 開始清除 Copilot Chat 記憶...
+2025-09-13 08:30:46,643 - VSCodeController - INFO - ✅ Copilot Chat 記憶已清除
+2025-09-13 08:30:46,646 - CopilotHandler - INFO - ========================= 處理專案: sample_project =============
+2025-09-13 08:30:46,647 - CopilotHandler - INFO - 開啟 Copilot Chat...
+2025-09-13 08:30:49,753 - CopilotHandler - INFO - ✅ Copilot 開啟 Chat 面板
+2025-09-13 08:30:49,769 - CopilotHandler - INFO - 發送提示詞到 Copilot Chat...
+2025-09-13 08:30:53,938 - CopilotHandler - INFO - ✅ Copilot 發送提示詞 - 長度: 77 字元
+2025-09-13 08:30:53,941 - CopilotHandler - INFO - 等待 Copilot 回應 (超時: 5秒)...
+2025-09-13 08:30:59,493 - CopilotHandler - INFO - ✅ Copilot 回應等待完成 - 等待時間: 5秒
+2025-09-13 08:30:59,493 - CopilotHandler - INFO - 複製 Copilot 回應 (第 1/3 次)...
+2025-09-13 08:31:06,280 - CopilotHandler - INFO - ✅ Copilot 複製回應 - 長度: 1433 字元
+2025-09-13 08:31:06,284 - CopilotHandler - INFO - 儲存回應到: Y:\VSCode_Hybrid UI Automation Script\ExecutionResult\Success\sample_project_Copilot_AutoComplete_20250913_083106.md
+2025-09-13 08:31:06,291 - CopilotHandler - INFO - ✅ Copilot 儲存回應 - 檔案: sample_project_Copilot_AutoComplete_20250913_083106.md
+2025-09-13 08:31:06,291 - CopilotHandler - INFO - ✅ Copilot 專案處理完成 - sample_project
+2025-09-13 08:31:07,407 - MainController - INFO - ✅ VS Code 成功關閉，Copilot 回應已完成
+2025-09-13 08:31:07,409 - RetryHandler - INFO - ✅ 專案 sample_project 執行成功
+2025-09-13 08:31:09,421 - MainController - INFO - 處理專案 2/2: sample_project_2
+2025-09-13 08:31:09,428 - RetryHandler - INFO - 嘗試執行 專案 sample_project_2 (第 1/3 次)
+2025-09-13 08:31:09,439 - VSCodeController - INFO - 開啟專案: Y:\VSCode_Hybrid UI Automation Script\projects\sample_project_2
+2025-09-13 08:31:09,442 - VSCodeController - INFO - 發現現有 VS Code 實例，正在關閉...
+2025-09-13 08:31:09,446 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-13 08:31:12,464 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-13 08:31:12,476 - VSCodeController - INFO - 等待 VS Code 載入 (5秒)...
+2025-09-13 08:31:17,482 - VSCodeController - INFO - 初始化 VS Code UI...
+2025-09-13 08:31:17,483 - VSCodeUIInitializer - INFO - ========================= 開始初始化 VS Code UI =================
+2025-09-13 08:31:17,484 - VSCodeUIInitializer - INFO - 等待 VS Code 載入完成 (5秒)
+2025-09-13 08:31:22,493 - VSCodeUIInitializer - INFO - ✅ VS Code UI 初始化完成
+2025-09-13 08:31:22,495 - VSCodeController - INFO - ✅ 專案開啟成功: sample_project_2
+2025-09-13 08:31:22,497 - VSCodeController - INFO - 開始清除 Copilot Chat 記憶...
+2025-09-13 08:31:26,315 - VSCodeController - INFO - ✅ Copilot Chat 記憶已清除
+2025-09-13 08:31:26,320 - CopilotHandler - INFO - ========================= 處理專案: sample_project_2 ===========
+2025-09-13 08:31:26,322 - CopilotHandler - INFO - 開啟 Copilot Chat...
+2025-09-13 08:31:29,441 - CopilotHandler - INFO - ✅ Copilot 開啟 Chat 面板
+2025-09-13 08:31:29,447 - CopilotHandler - INFO - 發送提示詞到 Copilot Chat...
+2025-09-13 08:31:33,584 - CopilotHandler - INFO - ✅ Copilot 發送提示詞 - 長度: 77 字元
+2025-09-13 08:31:33,586 - CopilotHandler - INFO - 等待 Copilot 回應 (超時: 5秒)...
+2025-09-13 08:31:38,615 - CopilotHandler - INFO - ✅ Copilot 回應等待完成 - 等待時間: 5秒
+2025-09-13 08:31:38,636 - CopilotHandler - INFO - 複製 Copilot 回應 (第 1/3 次)...
+2025-09-13 08:31:45,778 - CopilotHandler - INFO - ✅ Copilot 複製回應 - 長度: 1565 字元
+2025-09-13 08:31:45,789 - CopilotHandler - INFO - 儲存回應到: Y:\VSCode_Hybrid UI Automation Script\ExecutionResult\Success\sample_project_2_Copilot_AutoComplete_20250913_083145.md
+2025-09-13 08:31:45,801 - CopilotHandler - INFO - ✅ Copilot 儲存回應 - 檔案: sample_project_2_Copilot_AutoComplete_20250913_083145.md
+2025-09-13 08:31:45,803 - CopilotHandler - INFO - ✅ Copilot 專案處理完成 - sample_project_2
+2025-09-13 08:31:46,923 - MainController - INFO - ✅ VS Code 成功關閉，Copilot 回應已完成
+2025-09-13 08:31:46,926 - RetryHandler - INFO - ✅ 專案 sample_project_2 執行成功
+2025-09-13 08:31:48,938 - MainController - INFO - 第 1 批完成: 成功 2, 失敗 0, 耗時 79.3秒
+2025-09-13 08:31:48,940 - ProjectManager - INFO - 需要重試的專案數量: 0
+2025-09-13 08:31:48,942 - MainController - INFO - 沒有需要重試的專案
+2025-09-13 08:31:48,945 - MainController - INFO - ========================= 執行完成摘要 ===========================
+2025-09-13 08:31:48,953 - MainController - INFO - 📊 批次處理完成:
+2025-09-13 08:31:48,954 - MainController - INFO -    總專案數: 2
+2025-09-13 08:31:48,954 - MainController - INFO -    成功: 2
+2025-09-13 08:31:48,955 - MainController - INFO -    失敗: 0
+2025-09-13 08:31:48,956 - MainController - INFO -    成功率: 100.0%
+2025-09-13 08:31:48,958 - MainController - INFO -    總耗時: 82.40秒
+2025-09-13 08:31:48,958 - ProjectManager - INFO - 已完成專案數量: 2
+2025-09-13 08:31:48,964 - ProjectManager - INFO - 失敗專案數量: 0
+2025-09-13 08:31:48,968 - ProjectManager - INFO - 待處理專案數量: 0
+2025-09-13 08:31:48,974 - ProjectManager - INFO - 摘要報告已儲存: Y:\VSCode_Hybrid UI Automation Script\projects\automation_report_20250913_083148.json
+2025-09-13 08:31:48,975 - MainController - INFO - 詳細報告已儲存: Y:\VSCode_Hybrid UI Automation Script\projects\automation_report_20250913_083148.json
+2025-09-13 08:31:48,977 - MainController - INFO - 清理執行環境...
+2025-09-13 08:31:48,977 - VSCodeController - INFO - 確保乾淨的執行環境...
+2025-09-13 08:31:48,979 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-13 08:31:51,985 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-13 08:31:51,987 - MainController - INFO - ✅ 環境清理完成

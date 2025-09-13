@@ -1,0 +1,14 @@
+2025-09-13 03:39:30,938 - VSCodeUIInitializer - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_033930.log
+2025-09-13 03:39:30,938 - VSCodeUIInitializer - INFO - VS Code UI 初始化器啟動
+2025-09-13 03:39:30,942 - VSCodeController - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_033930.log
+2025-09-13 03:39:30,946 - VSCodeController - INFO - VS Code 控制器初始化完成，已記錄現有 VS Code PID: {1632, 3456, 10488, 10520, 2120, 9192, 2636, 8780, 6064, 9200, 4660, 9236, 10392}
+2025-09-13 03:39:30,982 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_033930.log
+2025-09-13 03:39:30,982 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-13 03:39:30,990 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\VSCode_Hybrid UI Automation Script\logs\automation__20250913_033930.log
+2025-09-13 03:39:30,991 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-13 03:39:40,660 - VSCodeUIInitializer - INFO - ========================= 開始初始化 VS Code UI =================
+2025-09-13 03:39:40,661 - VSCodeUIInitializer - INFO - 等待 VS Code 載入完成 (5秒)
+2025-09-13 03:39:45,276 - VSCodeUIInitializer - INFO - ✅ VS Code UI 初始化完成
+2025-09-13 03:40:22,829 - VSCodeUIInitializer - INFO - ========================= 開始初始化 VS Code UI =================
+2025-09-13 03:40:22,830 - VSCodeUIInitializer - INFO - 等待 VS Code 載入完成 (5秒)
+2025-09-13 03:40:29,587 - VSCodeUIInitializer - INFO - ✅ VS Code UI 初始化完成
