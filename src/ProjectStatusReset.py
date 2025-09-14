@@ -4,7 +4,7 @@ from pathlib import Path
 import os
 
 status_file = Path('projects/automation_status.json')
-script_root = Path(__file__).parent  # 腳本根目錄
+script_root = Path(__file__).parent.parent  # 腳本根目錄
 execution_result_dir = script_root / "ExecutionResult"
 
 # 刪除舊的 automation_report 文件

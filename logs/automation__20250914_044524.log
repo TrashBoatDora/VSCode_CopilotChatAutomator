@@ -1,0 +1,29 @@
+2025-09-14 04:45:24,572 - HybridUIAutomation - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_044524.log
+2025-09-14 04:45:24,645 - ProjectManager - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_044524.log
+2025-09-14 04:45:24,646 - ProjectManager - INFO - 專案管理器初始化 - 根目錄: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\projects
+2025-09-14 04:45:25,022 - VSCodeUIInitializer - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_044524.log
+2025-09-14 04:45:25,027 - VSCodeUIInitializer - INFO - VS Code UI 初始化器啟動
+2025-09-14 04:45:32,767 - HybridUIAutomation - INFO - 🚀 開始處理專案: sample_project
+2025-09-14 04:45:32,770 - HybridUIAutomation - INFO - [sample_project] 開始處理專案
+2025-09-14 04:45:32,778 - HybridUIAutomation - INFO - [sample_project] 開啟 VS Code 專案
+2025-09-14 04:45:40,843 - VSCodeUIInitializer - INFO - ========================= 開始初始化 VS Code UI =================
+2025-09-14 04:45:40,843 - VSCodeUIInitializer - INFO - 等待 VS Code 載入完成 (5秒)
+2025-09-14 04:45:45,847 - VSCodeUIInitializer - INFO - ✅ VS Code UI 初始化完成
+2025-09-14 04:45:45,853 - HybridUIAutomation - INFO - [sample_project] 清除 Copilot Chat 記憶
+2025-09-14 04:45:49,732 - HybridUIAutomation - INFO - [sample_project] 處理 Copilot Chat (智能等待: 開啟)
+2025-09-14 04:46:11,820 - HybridUIAutomation - INFO - [sample_project] 驗證處理結果
+2025-09-14 04:46:11,829 - HybridUIAutomation - INFO - [sample_project] 智能關閉專案並清除記憶
+2025-09-14 04:46:12,959 - HybridUIAutomation - INFO - [sample_project] 專案處理完成
+2025-09-14 04:46:12,967 - HybridUIAutomation - INFO - ✅ 專案處理成功: sample_project (耗時: 40.22秒)
+2025-09-14 04:46:14,978 - HybridUIAutomation - INFO - 🚀 開始處理專案: sample_project_2
+2025-09-14 04:46:14,979 - HybridUIAutomation - INFO - [sample_project_2] 開始處理專案
+2025-09-14 04:46:14,989 - HybridUIAutomation - INFO - [sample_project_2] 開啟 VS Code 專案
+2025-09-14 04:46:23,025 - VSCodeUIInitializer - INFO - ========================= 開始初始化 VS Code UI =================
+2025-09-14 04:46:23,030 - VSCodeUIInitializer - INFO - 等待 VS Code 載入完成 (5秒)
+2025-09-14 04:46:28,036 - VSCodeUIInitializer - INFO - ✅ VS Code UI 初始化完成
+2025-09-14 04:46:28,041 - HybridUIAutomation - INFO - [sample_project_2] 清除 Copilot Chat 記憶
+2025-09-14 04:46:31,868 - HybridUIAutomation - INFO - [sample_project_2] 處理 Copilot Chat (智能等待: 開啟)
+2025-09-14 04:46:53,615 - HybridUIAutomation - INFO - [sample_project_2] 驗證處理結果
+2025-09-14 04:46:53,621 - HybridUIAutomation - INFO - [sample_project_2] 智能關閉專案並清除記憶
+2025-09-14 04:46:54,735 - HybridUIAutomation - INFO - [sample_project_2] 專案處理完成
+2025-09-14 04:46:54,747 - HybridUIAutomation - INFO - ✅ 專案處理成功: sample_project_2 (耗時: 39.78秒)

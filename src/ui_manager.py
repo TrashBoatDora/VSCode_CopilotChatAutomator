@@ -134,7 +134,7 @@ class UIManager:
             
         try:
             # 直接執行重置腳本，不使用多執行緒
-            reset_script = Path(__file__).parent.parent / "ProjectStatusReset.py"
+            reset_script = Path(__file__).parent.parent / "src" / "ProjectStatusReset.py"
             result = subprocess.run(
                 [sys.executable, str(reset_script)], 
                 capture_output=True, 
