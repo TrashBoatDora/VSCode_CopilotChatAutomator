@@ -21,6 +21,7 @@ from src.project_manager import ProjectManager, ProjectInfo
 from src.vscode_controller import VSCodeController
 from src.copilot_handler import CopilotHandler
 from src.image_recognition import ImageRecognition
+from src.ui_manager import UIManager
 from src.error_handler import (
     ErrorHandler, RetryHandler, RecoveryManager,
     AutomationError, ErrorType, RecoveryAction
@@ -41,6 +42,10 @@ class HybridUIAutomationScript:
         self.image_recognition = ImageRecognition()
         self.retry_handler = RetryHandler(self.error_handler)
         self.recovery_manager = RecoveryManager()
+        self.ui_manager = UIManager()
+        
+        # 執行選項
+        self.use_smart_wait = True  # 預設使用智能等待
         
         # 執行統計
         self.total_projects = 0
@@ -62,6 +67,18 @@ class HybridUIAutomationScript:
         try:
             self.start_time = time.time()
             self.logger.create_separator("開始執行自動化腳本")
+            
+            # 顯示選項對話框
+            reset_selected, self.use_smart_wait = self.ui_manager.show_options_dialog()
+            
+            # 如果選擇重置，執行重置腳本
+            if reset_selected:
+                self.logger.info("使用者選擇執行專案狀態重置")
+                if not self.ui_manager.execute_reset_if_needed(True):
+                    self.logger.error("重置專案狀態失敗")
+                    return False
+            
+            self.logger.info(f"使用者選擇{'啟用' if self.use_smart_wait else '停用'}智能等待功能")
             
             # 前置檢查
             if not self._pre_execution_checks():
@@ -319,9 +336,11 @@ class HybridUIAutomationScript:
             if self.error_handler.emergency_stop_requested:
                 raise AutomationError("收到中斷請求", ErrorType.USER_INTERRUPT)
             
-            # 步驟3: 處理 Copilot Chat
-            project_logger.log("處理 Copilot Chat")
-            success, error_msg = self.copilot_handler.process_project_complete(project.path)
+            # 步驟3: 處理 Copilot Chat（使用使用者選擇的等待模式）
+            project_logger.log(f"處理 Copilot Chat (智能等待: {'開啟' if self.use_smart_wait else '關閉'})")
+            success, error_msg = self.copilot_handler.process_project_complete(
+                project.path, use_smart_wait=self.use_smart_wait
+            )
             
             if not success:
                 raise AutomationError(

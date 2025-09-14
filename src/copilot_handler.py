@@ -128,12 +128,13 @@ class CopilotHandler:
             self.logger.error(f"讀取提示詞檔案失敗: {str(e)}")
             return None
     
-    def wait_for_response(self, timeout: int = None) -> bool:
+    def wait_for_response(self, timeout: int = None, use_smart_wait: bool = None) -> bool:
         """
-        等待 Copilot 回應完成 (使用簡單時間等待)
+        等待 Copilot 回應完成
         
         Args:
             timeout: 超時時間（秒），若為 None 則使用配置值
+            use_smart_wait: 是否使用智能等待，若為 None 則使用配置值
             
         Returns:
             bool: 是否成功等到回應
@@ -141,26 +142,136 @@ class CopilotHandler:
         try:
             if timeout is None:
                 timeout = config.COPILOT_RESPONSE_TIMEOUT
+                
+            if use_smart_wait is None:
+                use_smart_wait = config.SMART_WAIT_ENABLED
             
-            self.logger.info(f"等待 Copilot 回應 (超時: {timeout}秒)...")
+            self.logger.info(f"等待 Copilot 回應 (超時: {timeout}秒, 智能等待: {'開啟' if use_smart_wait else '關閉'})...")
             
-            # 使用固定等待時間，避免圖像識別複雜度
-            wait_time = min(timeout, 60)  # 最多等待60秒
-            
-            # 分段睡眠，每秒檢查一次中斷請求
-            for i in range(wait_time):
-                # 檢查是否有緊急停止請求
-                if self.error_handler and self.error_handler.emergency_stop_requested:
-                    self.logger.warning("收到中斷請求，停止等待 Copilot 回應")
-                    return False
-                time.sleep(1)
-            
-            self.logger.copilot_interaction("回應等待完成", "SUCCESS", f"等待時間: {wait_time}秒")
-            return True
+            if use_smart_wait:
+                return self._smart_wait_for_response(timeout)
+            else:
+                # 使用固定等待時間，避免圖像識別複雜度
+                wait_time = min(timeout, 60)  # 最多等待60秒
+                
+                # 分段睡眠，每秒檢查一次中斷請求
+                for i in range(wait_time):
+                    # 檢查是否有緊急停止請求
+                    if self.error_handler and self.error_handler.emergency_stop_requested:
+                        self.logger.warning("收到中斷請求，停止等待 Copilot 回應")
+                        return False
+                    time.sleep(1)
+                
+                self.logger.copilot_interaction("回應等待完成", "SUCCESS", f"等待時間: {wait_time}秒")
+                return True
             
         except Exception as e:
             self.logger.copilot_interaction("等待回應", "ERROR", str(e))
             return False
+    
+    def _smart_wait_for_response(self, timeout: int) -> bool:
+        """
+        智能等待 Copilot 回應完成 (透過檢查回應內容是否變化)
+        
+        Args:
+            timeout: 超時時間（秒）
+            
+        Returns:
+            bool: 是否成功等到回應
+        """
+        try:
+            self.logger.info("使用智能等待檢測 Copilot 回應...")
+            
+            start_time = time.time()
+            max_attempts = config.SMART_WAIT_MAX_ATTEMPTS
+            check_interval = config.SMART_WAIT_INTERVAL
+            
+            last_response = ""
+            stable_count = 0
+            attempt = 0
+            
+            # 持續嘗試複製回應，直到回應穩定或超時
+            while (time.time() - start_time) < timeout and attempt < max_attempts:
+                # 檢查是否有緊急停止請求
+                if self.error_handler and self.error_handler.emergency_stop_requested:
+                    self.logger.warning("收到中斷請求，停止等待 Copilot 回應")
+                    return False
+                
+                attempt += 1
+                self.logger.debug(f"智能等待: 嘗試 {attempt}/{max_attempts}")
+                
+                # 嘗試複製回應內容
+                current_response = self._try_copy_response_without_logging()
+                
+                if current_response:
+                    # 比較新舊回應
+                    if current_response == last_response:
+                        stable_count += 1
+                        self.logger.debug(f"回應穩定計數: {stable_count}/2")
+                        
+                        # 如果回應連續兩次未變化，認為已完成
+                        if stable_count >= 2:
+                            elapsed = time.time() - start_time
+                            self.logger.copilot_interaction("智能等待回應完成", "SUCCESS", f"等待時間: {elapsed:.1f}秒, 嘗試次數: {attempt}")
+                            return True
+                    else:
+                        # 回應有變化，重置穩定計數
+                        stable_count = 0
+                        self.logger.debug("回應內容仍在變化中...")
+                    
+                    last_response = current_response
+                
+                # 等待一段時間再重新檢查
+                time.sleep(check_interval)
+            
+            # 如果到這裡還沒返回，則表示超時了
+            if (time.time() - start_time) >= timeout:
+                self.logger.warning(f"智能等待超時 ({timeout}秒)")
+            elif attempt >= max_attempts:
+                self.logger.warning(f"智能等待達到最大嘗試次數 ({max_attempts}次)")
+            
+            # 即使超時也返回 True，因為可能已經有部分回應
+            self.logger.copilot_interaction("智能等待回應", "WARNING", "超時但仍繼續處理")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"智能等待時發生錯誤: {str(e)}")
+            # 發生錯誤時仍然返回 True，嘗試繼續處理
+            return True
+    
+    def _try_copy_response_without_logging(self) -> str:
+        """
+        嘗試複製 Copilot 的回應內容 (用於智能等待)
+        
+        Returns:
+            str: 回應內容，若複製失敗則返回空字串
+        """
+        try:
+            # 清空剪貼簿
+            pyperclip.copy("")
+            time.sleep(0.5)
+            
+            # 使用鍵盤操作複製回應
+            pyautogui.hotkey('ctrl', 'shift', 'i')
+            time.sleep(0.5)
+            pyautogui.hotkey('ctrl', 'up')
+            time.sleep(0.5)
+            pyautogui.hotkey('shift', 'f10')
+            time.sleep(0.5)
+            pyautogui.press('down')
+            time.sleep(0.2)
+            pyautogui.press('down')
+            time.sleep(0.2)
+            pyautogui.press('enter')
+            time.sleep(1)
+            
+            # 取得剪貼簿內容
+            response = pyperclip.paste()
+            return response if response else ""
+            
+        except Exception:
+            # 忽略錯誤，安靜地返回空字串
+            return ""
     
     def copy_response(self) -> Optional[str]:
         """
@@ -309,12 +420,13 @@ class CopilotHandler:
             self.logger.copilot_interaction("儲存回應", "ERROR", str(e))
             return False
     
-    def process_project_complete(self, project_path: str) -> Tuple[bool, Optional[str]]:
+    def process_project_complete(self, project_path: str, use_smart_wait: bool = None) -> Tuple[bool, Optional[str]]:
         """
         完整處理一個專案（發送提示 -> 等待回應 -> 複製並儲存）
         
         Args:
             project_path: 專案路徑
+            use_smart_wait: 是否使用智能等待，若為 None 則使用配置值
             
         Returns:
             Tuple[bool, Optional[str]]: (是否成功, 錯誤訊息)
@@ -331,8 +443,8 @@ class CopilotHandler:
             if not self.send_prompt():
                 return False, "無法發送提示詞"
             
-            # 步驟3: 等待回應
-            if not self.wait_for_response():
+            # 步驟3: 等待回應 (使用指定的等待模式)
+            if not self.wait_for_response(use_smart_wait=use_smart_wait):
                 return False, "等待回應超時"
             
             # 步驟4: 複製回應
@@ -384,30 +496,14 @@ class CopilotHandler:
 copilot_handler = CopilotHandler()
 
 # 便捷函數
-def process_project_with_copilot(project_path: str) -> Tuple[bool, Optional[str]]:
+def process_project_with_copilot(project_path: str, use_smart_wait: bool = None) -> Tuple[bool, Optional[str]]:
     """處理專案的便捷函數"""
-    return copilot_handler.process_project_complete(project_path)
+    return copilot_handler.process_project_complete(project_path, use_smart_wait)
 
 def send_copilot_prompt(prompt: str = None) -> bool:
     """發送提示詞的便捷函數"""
     return copilot_handler.send_prompt(prompt)
 
-def wait_for_copilot_response(timeout: int = None) -> bool:
+def wait_for_copilot_response(timeout: int = None, use_smart_wait: bool = None) -> bool:
     """等待回應的便捷函數"""
-    return copilot_handler.wait_for_response(timeout)
-
-# 創建全域實例
-copilot_handler = CopilotHandler()
-
-# 便捷函數
-def process_project_with_copilot(project_path: str) -> Tuple[bool, Optional[str]]:
-    """處理專案的便捷函數"""
-    return copilot_handler.process_project_complete(project_path)
-
-def send_copilot_prompt(prompt: str = None) -> bool:
-    """發送提示詞的便捷函數"""
-    return copilot_handler.send_prompt(prompt)
-
-def wait_for_copilot_response(timeout: int = None) -> bool:
-    """等待回應的便捷函數"""
-    return copilot_handler.wait_for_response(timeout)
+    return copilot_handler.wait_for_response(timeout, use_smart_wait)

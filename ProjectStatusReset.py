@@ -1,10 +1,21 @@
 import json
 import shutil
 from pathlib import Path
+import os
 
 status_file = Path('projects/automation_status.json')
 script_root = Path(__file__).parent  # 腳本根目錄
 execution_result_dir = script_root / "ExecutionResult"
+
+# 刪除舊的 automation_report 文件
+projects_dir = Path('projects')
+if projects_dir.exists():
+    for file in projects_dir.glob("automation_report_*.json"):
+        try:
+            file.unlink()
+            print(f"已刪除舊的報告文件: {file}")
+        except Exception as e:
+            print(f"刪除 {file} 失敗: {e}")
 
 if status_file.exists():
     with open(status_file, 'r', encoding='utf-8') as f:

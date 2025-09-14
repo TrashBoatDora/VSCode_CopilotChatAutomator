@@ -31,6 +31,12 @@ class Config:
     COPILOT_COPY_RETRY_MAX = 3      # 複製回應重試次數
     COPILOT_COPY_RETRY_DELAY = 2    # 複製重試間隔（秒）
     
+    # 智能等待設定
+    SMART_WAIT_ENABLED = True    # 是否啟用智能等待
+    SMART_WAIT_MAX_ATTEMPTS = 5  # 智能等待最大嘗試次數
+    SMART_WAIT_INTERVAL = 3      # 智能等待檢查間隔（秒）
+    SMART_WAIT_TIMEOUT = 60      # 智能等待最大時間（秒）
+    
     # Copilot 記憶清除命令序列
     COPILOT_CLEAR_MEMORY_COMMANDS = [
         # 開啟 Copilot Chat

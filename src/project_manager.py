@@ -394,7 +394,13 @@ class ProjectManager:
             str: 報告檔案路徑
         """
         report = self.generate_summary_report()
-        report_file = self.projects_root / f"automation_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        
+        # 建立統一的 ExecutionResult/AutomationReport 資料夾
+        script_root = Path(__file__).parent.parent  # 腳本根目錄
+        report_dir = script_root / "ExecutionResult" / "AutomationReport"
+        report_dir.mkdir(parents=True, exist_ok=True)
+        
+        report_file = report_dir / f"automation_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         
         try:
             with open(report_file, 'w', encoding='utf-8') as f:

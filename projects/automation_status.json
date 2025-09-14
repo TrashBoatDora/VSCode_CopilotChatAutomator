@@ -1,9 +1,9 @@
 {
-  "last_updated": "2025-09-13T08:31:46.930601",
+  "last_updated": "2025-09-14T04:30:56.750844",
   "projects": [
     {
       "name": "sample_project",
-      "path": "Y:\\VSCode_Hybrid UI Automation Script\\projects\\sample_project",
+      "path": "Y:\\New_VSCode_Hybrid UI Automation Script\\VSCode_CopilotChatAutomator\\projects\\sample_project",
       "status": "completed",
       "has_copilot_file": true,
       "file_count": 2,
@@ -11,14 +11,14 @@
         "main.py",
         "Calculator.java"
       ],
-      "last_processed": "2025-09-13T08:31:07.414206",
+      "last_processed": "2025-09-14T04:30:10.466961",
       "error_message": null,
-      "processing_time": 37.75376749038696,
+      "processing_time": 31.031548738479614,
       "retry_count": 0
     },
     {
       "name": "sample_project_2",
-      "path": "Y:\\VSCode_Hybrid UI Automation Script\\projects\\sample_project_2",
+      "path": "Y:\\New_VSCode_Hybrid UI Automation Script\\VSCode_CopilotChatAutomator\\projects\\sample_project_2",
       "status": "completed",
       "has_copilot_file": true,
       "file_count": 2,
@@ -26,9 +26,9 @@
         "main.py",
         "Calculator.java"
       ],
-      "last_processed": "2025-09-13T08:31:46.930591",
+      "last_processed": "2025-09-14T04:30:56.750688",
       "error_message": null,
-      "processing_time": 37.50404500961304,
+      "processing_time": 44.305694818496704,
       "retry_count": 0
     }
   ]
