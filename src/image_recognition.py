@@ -194,30 +194,95 @@ class ImageRecognition:
     
     def check_copilot_response_ready(self) -> bool:
         """
-        檢查 Copilot 回應是否準備就緒
+        檢查 Copilot 回應是否準備就緒（新邏輯：基於 stop_button 和 send_button）
         
         Returns:
             bool: 回應是否準備就緒
         """
         try:
-            # 檢查重新生成按鈕是否出現
-            regenerate_button = self.find_image_on_screen(
-                str(config.REGENERATE_BUTTON_IMAGE),
+            # 第一步：檢查是否有 stop 按鈕（如果有，表示還在回應中）
+            stop_button = self.find_image_on_screen(
+                str(config.STOP_BUTTON_IMAGE),
                 confidence=config.IMAGE_CONFIDENCE
             )
             
-            if regenerate_button:
-                self.logger.debug("檢測到重新生成按鈕，回應可能已完成")
+            if stop_button:
+                self.logger.debug("檢測到 stop 按鈕，Copilot 仍在回應中...")
+                return False
+            
+            # 第二步：檢查是否有 send 按鈕（stop 按鈕消失後應該出現 send 按鈕）
+            send_button = self.find_image_on_screen(
+                str(config.SEND_BUTTON_IMAGE),
+                confidence=config.IMAGE_CONFIDENCE
+            )
+            
+            if send_button:
+                self.logger.debug("檢測到 send 按鈕且無 stop 按鈕，Copilot 回應已完成")
                 return True
             
-            # 可以添加其他檢查邏輯
-            # 例如檢查是否有複製按鈕、輸入框狀態等
-            
+            # 如果既沒有 stop 也沒有 send，狀態不明，假設還未完成
+            self.logger.debug("未檢測到 stop 或 send 按鈕，狀態不明確")
             return False
             
         except Exception as e:
             self.logger.debug(f"檢查 Copilot 回應狀態時發生錯誤: {str(e)}")
             return False
+    
+    def check_copilot_response_status(self) -> dict:
+        """
+        詳細檢查 Copilot 回應狀態（用於智能等待）
+        
+        Returns:
+            dict: 包含詳細狀態信息的字典
+        """
+        try:
+            status = {
+                'has_stop_button': False,
+                'has_send_button': False,
+                'is_responding': False,
+                'is_ready': False,
+                'status_message': ''
+            }
+            
+            # 檢查 stop 按鈕
+            stop_button = self.find_image_on_screen(
+                str(config.STOP_BUTTON_IMAGE),
+                confidence=config.IMAGE_CONFIDENCE
+            )
+            status['has_stop_button'] = bool(stop_button)
+            
+            # 檢查 send 按鈕
+            send_button = self.find_image_on_screen(
+                str(config.SEND_BUTTON_IMAGE),
+                confidence=config.IMAGE_CONFIDENCE
+            )
+            status['has_send_button'] = bool(send_button)
+            
+            # 判斷狀態
+            if status['has_stop_button']:
+                status['is_responding'] = True
+                status['is_ready'] = False
+                status['status_message'] = "Copilot 正在回應中（檢測到 stop 按鈕）"
+            elif status['has_send_button']:
+                status['is_responding'] = False
+                status['is_ready'] = True
+                status['status_message'] = "Copilot 回應已完成（檢測到 send 按鈕）"
+            else:
+                status['is_responding'] = False
+                status['is_ready'] = False
+                status['status_message'] = "狀態不明確（未檢測到 stop 或 send 按鈕）"
+            
+            return status
+            
+        except Exception as e:
+            self.logger.debug(f"檢查 Copilot 回應詳細狀態時發生錯誤: {str(e)}")
+            return {
+                'has_stop_button': False,
+                'has_send_button': False,
+                'is_responding': False,
+                'is_ready': False,
+                'status_message': f'檢測錯誤: {str(e)}'
+            }
     
     def click_copilot_copy_button(self) -> bool:
         """
@@ -238,7 +303,7 @@ class ImageRecognition:
     
     def validate_required_images(self) -> bool:
         """
-        驗證所需的圖像資源是否可用（現已變為可選）
+        驗證所需的圖像資源是否可用（更新後的版本：只檢查 stop_button 和 send_button）
         
         Returns:
             bool: 所有必需圖像是否都存在且可讀取
@@ -249,10 +314,10 @@ class ImageRecognition:
                 self.logger.info("圖像識別已設為可選，跳過圖像檔案檢查")
                 return True
             
+            # 更新後只需要這兩個圖像
             required_images = [
-                config.REGENERATE_BUTTON_IMAGE,
-                config.COPY_BUTTON_IMAGE,
-                config.COPILOT_INPUT_BOX_IMAGE
+                config.STOP_BUTTON_IMAGE,
+                config.SEND_BUTTON_IMAGE
             ]
             
             missing_images = []

@@ -382,25 +382,53 @@ class HybridUIAutomationScript:
             bool: 關閉是否成功
         """
         try:
+            # 如果使用智能等待，表示已經在 _smart_wait_for_response 中等待回應完成
+            # 但我們仍需要進行最後確認
+            if self.use_smart_wait:
+                self.logger.info("使用智能等待模式，進行最後確認...")
+                
+                # 最後一次確認回應內容
+                self.logger.info("最後確認 Copilot 回應...")
+                final_response = self.copilot_handler.copy_response()
+                
+                if final_response and len(final_response) > 100:
+                    self.logger.info(f"✅ 確認收到完整回應 ({len(final_response)} 字元)")
+                    
+                    # 等待3秒確保所有操作完成
+                    self.logger.info("等待 3 秒確保所有操作完成...")
+                    time.sleep(3)
+                    
+                    # 嘗試正常關閉
+                    return self.vscode_controller.close_current_project(force=False)
+                else:
+                    self.logger.warning("⚠️ 最後確認時未能獲取到有效回應，但仍嘗試關閉")
+                    return self.vscode_controller.close_current_project(force=False)
+                
+            # 固定等待模式下需要進行額外檢查
             max_attempts = 3
             for attempt in range(max_attempts):
                 self.logger.debug(f"嘗試關閉專案 (第 {attempt + 1}/{max_attempts} 次)")
                 
+                # 先嘗試最後一次複製
+                self.logger.info("關閉前嘗試再次複製回應...")
+                response = self.copilot_handler.copy_response()
+                
+                if response and len(response) > 50:
+                    self.logger.info(f"✅ 獲取到回應內容 ({len(response)} 字元)")
+                else:
+                    self.logger.warning("⚠️ 未能獲取到有效回應內容")
+                
+                # 等待一小段時間確認回應已完成
+                time.sleep(3)
+                
                 # 測試是否可以關閉
-                if self.copilot_handler.test_vscode_close_ready():
+                if self.vscode_controller.close_current_project(force=False):
                     self.logger.info("✅ VS Code 成功關閉，Copilot 回應已完成")
                     return True
                 else:
                     if attempt < max_attempts - 1:
-                        self.logger.info("VS Code 無法關閉，可能 Copilot 仍在回應中，等待後重試...")
-                        time.sleep(3)  # 等待 3 秒
-                        
-                        # 重新嘗試複製回應
-                        self.logger.info("重新嘗試複製 Copilot 回應...")
-                        response = self.copilot_handler.copy_response()
-                        if response:
-                            self.logger.info("重新複製成功，繼續嘗試關閉...")
-                        
+                        self.logger.info("VS Code 無法正常關閉，可能 Copilot 仍在回應中，等待後重試...")
+                        time.sleep(5)  # 增加等待時間
                         continue
                     else:
                         self.logger.warning("達到最大重試次數，強制關閉 VS Code")

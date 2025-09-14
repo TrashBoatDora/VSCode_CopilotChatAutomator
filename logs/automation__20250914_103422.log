@@ -1,0 +1,30 @@
+2025-09-14 10:34:22,431 - HybridUIAutomation - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103422.log
+2025-09-14 10:34:22,516 - ProjectManager - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103422.log
+2025-09-14 10:34:22,517 - ProjectManager - INFO - 專案管理器初始化 - 根目錄: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\projects
+2025-09-14 10:34:31,925 - HybridUIAutomation - INFO - 🚀 開始處理專案: public-apis_AutoDeletion
+2025-09-14 10:34:31,928 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 開始處理專案
+2025-09-14 10:34:31,949 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 開啟 VS Code 專案
+2025-09-14 10:34:42,584 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 清除 Copilot Chat 記憶
+2025-09-14 10:34:45,907 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 處理 Copilot Chat (智能等待: 開啟)
+2025-09-14 10:36:17,228 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 驗證處理結果
+2025-09-14 10:36:17,232 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 智能關閉專案並清除記憶
+2025-09-14 10:36:27,408 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 專案處理完成
+2025-09-14 10:36:27,420 - HybridUIAutomation - INFO - ✅ 專案處理成功: public-apis_AutoDeletion (耗時: 115.50秒)
+2025-09-14 10:36:29,153 - HybridUIAutomation - INFO - 🚀 開始處理專案: sample_project
+2025-09-14 10:36:29,154 - HybridUIAutomation - INFO - [sample_project] 開始處理專案
+2025-09-14 10:36:29,163 - HybridUIAutomation - INFO - [sample_project] 開啟 VS Code 專案
+2025-09-14 10:36:39,573 - HybridUIAutomation - INFO - [sample_project] 清除 Copilot Chat 記憶
+2025-09-14 10:36:43,431 - HybridUIAutomation - INFO - [sample_project] 處理 Copilot Chat (智能等待: 開啟)
+2025-09-14 10:38:04,592 - HybridUIAutomation - INFO - [sample_project] 驗證處理結果
+2025-09-14 10:38:04,595 - HybridUIAutomation - INFO - [sample_project] 智能關閉專案並清除記憶
+2025-09-14 10:38:16,975 - HybridUIAutomation - INFO - [sample_project] 專案處理完成
+2025-09-14 10:38:16,985 - HybridUIAutomation - INFO - ✅ 專案處理成功: sample_project (耗時: 107.86秒)
+2025-09-14 10:38:19,305 - HybridUIAutomation - INFO - 🚀 開始處理專案: sample_project_2
+2025-09-14 10:38:19,306 - HybridUIAutomation - INFO - [sample_project_2] 開始處理專案
+2025-09-14 10:38:19,323 - HybridUIAutomation - INFO - [sample_project_2] 開啟 VS Code 專案
+2025-09-14 10:38:32,764 - HybridUIAutomation - INFO - [sample_project_2] 清除 Copilot Chat 記憶
+2025-09-14 10:38:37,657 - HybridUIAutomation - INFO - [sample_project_2] 處理 Copilot Chat (智能等待: 開啟)
+2025-09-14 10:40:28,620 - HybridUIAutomation - INFO - [sample_project_2] 驗證處理結果
+2025-09-14 10:40:28,629 - HybridUIAutomation - INFO - [sample_project_2] 智能關閉專案並清除記憶
+2025-09-14 10:40:40,609 - HybridUIAutomation - INFO - [sample_project_2] 專案處理完成
+2025-09-14 10:40:40,620 - HybridUIAutomation - INFO - ✅ 專案處理成功: sample_project_2 (耗時: 141.33秒)

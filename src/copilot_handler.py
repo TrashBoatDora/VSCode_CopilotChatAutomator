@@ -17,6 +17,7 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent))
 from config.config import config
 from src.logger import get_logger
+from src.image_recognition import image_recognition
 
 class CopilotHandler:
     """Copilot Chat 操作處理器"""
@@ -27,6 +28,7 @@ class CopilotHandler:
         self.is_chat_open = False
         self.last_response = ""
         self.error_handler = error_handler  # 添加 error_handler 引用
+        self.image_recognition = image_recognition  # 添加圖像識別引用
         self.logger.info("Copilot Chat 處理器初始化完成")
     
     def open_copilot_chat(self) -> bool:
@@ -171,7 +173,7 @@ class CopilotHandler:
     
     def _smart_wait_for_response(self, timeout: int) -> bool:
         """
-        智能等待 Copilot 回應完成 (透過檢查回應內容是否變化)
+        智能等待 Copilot 回應完成 (確保回應真正完整)
         
         Args:
             timeout: 超時時間（秒）
@@ -180,98 +182,374 @@ class CopilotHandler:
             bool: 是否成功等到回應
         """
         try:
-            self.logger.info("使用智能等待檢測 Copilot 回應...")
+            self.logger.info(f"智能等待 Copilot 回應，最長等待 {timeout} 秒...")
             
             start_time = time.time()
-            max_attempts = config.SMART_WAIT_MAX_ATTEMPTS
-            check_interval = config.SMART_WAIT_INTERVAL
+            check_interval = 2  # 增加檢查間隔，減少頻繁檢查
             
+            # 初始化前一次的回應內容和穩定計數器
             last_response = ""
             stable_count = 0
-            attempt = 0
+            required_stable_count = 5  # 增加穩定檢查次數，確保真正完成
+            min_stable_time = 10  # 增加最小穩定時間
+            min_response_length = 200  # 最小回應長度，確保有實質內容
             
-            # 持續嘗試複製回應，直到回應穩定或超時
-            while (time.time() - start_time) < timeout and attempt < max_attempts:
+            # 狀態追蹤
+            first_content_detected = False
+            last_change_time = start_time
+            regenerate_detected = False
+            
+            # 最小等待時間，確保 Copilot 有時間開始回應
+            initial_wait = 3  # 減少初始等待時間，給更多時間做實際檢測
+            self.logger.info(f"初始等待 {initial_wait} 秒，讓 Copilot 開始生成回應...")
+            time.sleep(initial_wait)
+            
+            # 持續監控直到回應穩定
+            while (time.time() - start_time) < timeout:
                 # 檢查是否有緊急停止請求
                 if self.error_handler and self.error_handler.emergency_stop_requested:
                     self.logger.warning("收到中斷請求，停止等待 Copilot 回應")
                     return False
                 
-                attempt += 1
-                self.logger.debug(f"智能等待: 嘗試 {attempt}/{max_attempts}")
+                # 檢查 Copilot 回應狀態（使用新的 stop/send 按鈕檢測）
+                try:
+                    copilot_status = self.image_recognition.check_copilot_response_status()
+                    
+                    if copilot_status['has_stop_button']:
+                        if not regenerate_detected:
+                            self.logger.info("🔄 檢測到 stop 按鈕，Copilot 正在回應中...")
+                            regenerate_detected = True
+                    elif copilot_status['has_send_button']:
+                        if regenerate_detected:
+                            self.logger.info("✅ stop 按鈕消失，send 按鈕出現，Copilot 回應可能已完成")
+                        else:
+                            self.logger.info("✅ 檢測到 send 按鈕，Copilot 可能已完成回應")
+                            regenerate_detected = True
+                    
+                    # 記錄詳細狀態
+                    self.logger.debug(f"Copilot 狀態: {copilot_status['status_message']}")
+                    
+                except Exception as e:
+                    self.logger.debug(f"圖像檢測錯誤: {e}")
+                    # 如果圖像檢測失敗，繼續使用內容檢測
                 
                 # 嘗試複製回應內容
                 current_response = self._try_copy_response_without_logging()
+                elapsed_time = time.time() - start_time
                 
-                if current_response:
-                    # 比較新舊回應
+                if current_response and len(current_response.strip()) > 0:
+                    if not first_content_detected:
+                        self.logger.info("✅ 檢測到 Copilot 開始回應")
+                        first_content_detected = True
+                    
+                    # 檢查內容是否與上次相同
                     if current_response == last_response:
                         stable_count += 1
-                        self.logger.debug(f"回應穩定計數: {stable_count}/2")
+                        time_since_change = time.time() - last_change_time
                         
-                        # 如果回應連續兩次未變化，認為已完成
-                        if stable_count >= 2:
-                            elapsed = time.time() - start_time
-                            self.logger.copilot_interaction("智能等待回應完成", "SUCCESS", f"等待時間: {elapsed:.1f}秒, 嘗試次數: {attempt}")
+                        self.logger.debug(f"回應穩定: {stable_count}/{required_stable_count} 次, "
+                                        f"穩定時間: {time_since_change:.1f}秒, "
+                                        f"長度: {len(current_response)} 字元")
+                        
+                        # 檢查回應完整性（放寬條件）
+                        is_content_complete = self._check_response_completeness(current_response)
+                        is_length_sufficient = len(current_response) >= min_response_length
+                        is_time_stable = time_since_change >= min_stable_time
+                        
+                        # 檢查圖像狀態（是否有 send 按鈕且無 stop 按鈕）
+                        image_ready = False
+                        try:
+                            if self.image_recognition.check_copilot_response_ready():
+                                image_ready = True
+                                self.logger.debug("圖像檢測確認：Copilot 回應已完成")
+                        except Exception as e:
+                            self.logger.debug(f"圖像檢測失敗，跳過: {e}")
+                        
+                        # 優化的完成條件：優先使用圖像檢測結果
+                        if image_ready and stable_count >= 2 and is_length_sufficient:
+                            # 圖像檢測確認回應完成，降低其他條件要求
+                            self.logger.info(f"🎉 Copilot 回應確認完成！（圖像檢測優先）")
+                            self.logger.info(f"  - 等待時間: {elapsed_time:.1f}秒")
+                            self.logger.info(f"  - 穩定檢查: {stable_count} 次")
+                            self.logger.info(f"  - 穩定時間: {time_since_change:.1f}秒")
+                            self.logger.info(f"  - 回應長度: {len(current_response)} 字元")
+                            self.logger.info(f"  - 圖像確認: ✅ 通過")
+                            self.logger.info(f"  - 完成條件: 圖像檢測確認")
+                            
+                            self.last_response = current_response
                             return True
+                        elif (stable_count >= required_stable_count and 
+                              is_content_complete and 
+                              is_length_sufficient and 
+                              is_time_stable):
+                            # 傳統完整條件檢查（作為備選方案）
+                            self.logger.info(f"🎉 Copilot 回應確認完成！（文本檢查）")
+                            self.logger.info(f"  - 等待時間: {elapsed_time:.1f}秒")
+                            self.logger.info(f"  - 穩定檢查: {stable_count} 次")
+                            self.logger.info(f"  - 穩定時間: {time_since_change:.1f}秒")
+                            self.logger.info(f"  - 回應長度: {len(current_response)} 字元")
+                            self.logger.info(f"  - 內容完整性: {'✅ 通過' if is_content_complete else '❌ 未通過'}")
+                            self.logger.info(f"  - 完成條件: 文本檢查通過")
+                            
+                            self.last_response = current_response
+                            return True
+                            
+                        # 如果只是時間穩定但內容不完整，給更多時間
+                        elif stable_count >= 3 and is_time_stable and not is_content_complete:
+                            self.logger.info("⚠️ 內容可能未完整，延長等待時間...")
+                            # 重置穩定計數但保持內容，繼續等待
+                            stable_count = max(1, stable_count - 2)
+                            
                     else:
-                        # 回應有變化，重置穩定計數
+                        # 內容有變化
+                        if last_response:
+                            self.logger.debug("📝 回應內容更新中...")
                         stable_count = 0
-                        self.logger.debug("回應內容仍在變化中...")
+                        last_change_time = time.time()
                     
                     last_response = current_response
+                    
+                elif first_content_detected:
+                    # 之前有內容，現在沒有，可能是複製失敗
+                    self.logger.warning("⚠️ 無法複製到內容，可能是複製操作失敗")
+                else:
+                    # 還沒有檢測到任何內容
+                    self.logger.debug(f"等待 Copilot 開始回應... ({elapsed_time:.1f}秒)")
                 
-                # 等待一段時間再重新檢查
+                # 暫停後繼續檢查
                 time.sleep(check_interval)
+                
+                # 定期報告狀態
+                if int(elapsed_time) % 10 == 0 and int(elapsed_time) > 0:
+                    status = "有內容" if current_response else "無內容"
+                    
+                    # 加入圖像檢測狀態
+                    image_status = ""
+                    try:
+                        copilot_status = self.image_recognition.check_copilot_response_status()
+                        if copilot_status['has_stop_button']:
+                            image_status = ", UI狀態: 回應中(stop)"
+                        elif copilot_status['has_send_button']:
+                            image_status = ", UI狀態: 完成(send)"
+                        else:
+                            image_status = ", UI狀態: 不明"
+                    except:
+                        image_status = ", UI狀態: 檢測失敗"
+                    
+                    self.logger.info(f"⏱️ 已等待 {int(elapsed_time)} 秒 ({status}, 長度: {len(current_response) if current_response else 0}{image_status})")
             
-            # 如果到這裡還沒返回，則表示超時了
-            if (time.time() - start_time) >= timeout:
-                self.logger.warning(f"智能等待超時 ({timeout}秒)")
-            elif attempt >= max_attempts:
-                self.logger.warning(f"智能等待達到最大嘗試次數 ({max_attempts}次)")
+            # 超時處理
+            self.logger.warning(f"⏰ 智能等待超時 ({timeout}秒)")
             
-            # 即使超時也返回 True，因為可能已經有部分回應
-            self.logger.copilot_interaction("智能等待回應", "WARNING", "超時但仍繼續處理")
-            return True
+            # 超時時，如果有回應內容就使用，否則返回失敗
+            if last_response and len(last_response.strip()) > 50:
+                self.logger.warning("💾 超時但有部分內容，嘗試使用現有回應")
+                self.last_response = last_response
+                return True
+            else:
+                self.logger.error("❌ 超時且無有效回應內容")
+                return False
             
         except Exception as e:
             self.logger.error(f"智能等待時發生錯誤: {str(e)}")
-            # 發生錯誤時仍然返回 True，嘗試繼續處理
-            return True
+            return False
+            
+    def _check_response_completeness(self, response: str) -> bool:
+        """
+        檢查回應是否看起來完整（簡化版本，減少誤判）
+        
+        Args:
+            response: Copilot 回應內容
+            
+        Returns:
+            bool: 回應是否看起來完整
+        """
+        # 如果回應為空或太短，明顯不完整
+        if not response or len(response) < 15:
+            return False
+            
+        # 只檢查最明顯的未完成標記
+        incomplete_markers = [
+            '```' if response.count('```') % 2 != 0 else None,  # 未閉合的程式碼區塊
+            '<function_calls>' if '<function_calls>' in response and '</function_calls>' not in response else None,  # 未閉合的 function_calls 標記
+        ]
+        
+        # 移除 None 值
+        incomplete_markers = [marker for marker in incomplete_markers if marker is not None]
+        
+        if incomplete_markers:
+            self.logger.debug(f"偵測到未閉合標記: {incomplete_markers}")
+            return False
+        
+        # 簡化的未完成信號檢查（只檢查最明顯的）
+        incomplete_signals = [
+            "我正在分析",
+            "讓我",
+            "正在生成",
+            "loading...",
+            "請稍等"
+        ]
+        
+        response_lower = response.lower()
+        for signal in incomplete_signals:
+            if signal in response_lower and len(response) < 200:
+                self.logger.debug(f"偵測到 Copilot 仍在思考的訊號: '{signal}'")
+                return False
+        
+        # 檢查是否有明顯截斷的內容（但只檢查結尾）
+        if response.rstrip().endswith(('...', '。。。', '未完', '待續')):
+            self.logger.debug("偵測到明顯的截斷標記")
+            return False
+                
+        # 大部分情況下認為是完整的
+        return True
     
     def _try_copy_response_without_logging(self) -> str:
         """
-        嘗試複製 Copilot 的回應內容 (用於智能等待)
+        嘗試複製 Copilot 的回應內容 (用於智能等待，穩定版)
         
         Returns:
             str: 回應內容，若複製失敗則返回空字串
         """
         try:
-            # 清空剪貼簿
-            pyperclip.copy("")
+            # 保存當前剪貼簿內容
+            original_clipboard = ""
+            try:
+                original_clipboard = pyperclip.paste()
+            except:
+                pass
+            
+            # 設置測試標記
+            test_marker = f"__COPILOT_TEST_{int(time.time())}__"
+            pyperclip.copy(test_marker)
             time.sleep(0.5)
             
-            # 使用鍵盤操作複製回應
-            pyautogui.hotkey('ctrl', 'shift', 'i')
-            time.sleep(0.5)
-            pyautogui.hotkey('ctrl', 'up')
-            time.sleep(0.5)
-            pyautogui.hotkey('shift', 'f10')
-            time.sleep(0.5)
-            pyautogui.press('down')
-            time.sleep(0.2)
-            pyautogui.press('down')
-            time.sleep(0.2)
-            pyautogui.press('enter')
-            time.sleep(1)
+            # 多種方法嘗試複製
+            methods = [
+                self._try_copy_method_context_menu,
+                self._try_copy_method_keyboard_only,
+                self._try_copy_method_alternative
+            ]
             
-            # 取得剪貼簿內容
-            response = pyperclip.paste()
-            return response if response else ""
+            for i, method in enumerate(methods):
+                try:
+                    self.logger.debug(f"嘗試複製方法 {i + 1}/{len(methods)}")
+                    response = method()
+                    
+                    if response and response != test_marker and len(response.strip()) > 20:
+                        # 驗證內容是否像是 Copilot 回應
+                        if self._validate_response_content(response):
+                            return response
+                        
+                except Exception as e:
+                    self.logger.debug(f"複製方法 {i + 1} 失敗: {e}")
+                    continue
             
-        except Exception:
-            # 忽略錯誤，安靜地返回空字串
             return ""
+            
+        except Exception as e:
+            return ""
+        finally:
+            # 嘗試恢復原始剪貼簿內容
+            try:
+                if original_clipboard and test_marker not in original_clipboard:
+                    pyperclip.copy(original_clipboard)
+            except:
+                pass
+    
+    def _try_copy_method_context_menu(self) -> str:
+        """使用右鍵選單複製"""
+        # 確保 VS Code 處於活動狀態
+        pyautogui.click(500, 300)
+        time.sleep(0.3)
+        
+        # 聚焦到 Copilot Chat
+        pyautogui.hotkey('ctrl', 'shift', 'i')
+        time.sleep(1.0)
+        
+        # 聚焦到回應區域
+        pyautogui.hotkey('ctrl', 'up')
+        time.sleep(1.0)
+        
+        # 選擇所有內容
+        pyautogui.hotkey('ctrl', 'a')
+        time.sleep(0.5)
+        
+        # 開啟右鍵選單
+        pyautogui.hotkey('shift', 'f10')
+        time.sleep(0.8)
+        
+        # 選擇複製選項 (通常是第2個選項)
+        pyautogui.press('down')
+        time.sleep(0.3)
+        pyautogui.press('down')
+        time.sleep(0.3)
+        pyautogui.press('enter')
+        time.sleep(1.5)
+        
+        return pyperclip.paste()
+    
+    def _try_copy_method_keyboard_only(self) -> str:
+        """使用純鍵盤操作複製"""
+        # 確保 VS Code 活動
+        pyautogui.hotkey('alt', 'tab')
+        time.sleep(0.5)
+        
+        # 聚焦到 Copilot Chat
+        pyautogui.hotkey('ctrl', 'shift', 'i')
+        time.sleep(1.0)
+        
+        # 跳轉到回應區域
+        pyautogui.hotkey('ctrl', 'up')
+        time.sleep(1.0)
+        
+        # 全選並複製
+        pyautogui.hotkey('ctrl', 'a')
+        time.sleep(0.5)
+        pyautogui.hotkey('ctrl', 'c')
+        time.sleep(1.5)
+        
+        return pyperclip.paste()
+    
+    def _try_copy_method_alternative(self) -> str:
+        """替代複製方法"""
+        # 重新聚焦到 VS Code
+        pyautogui.hotkey('ctrl', 'shift', 'i')
+        time.sleep(0.8)
+        
+        # 使用 Tab 導航到回應區域
+        pyautogui.press('tab')
+        time.sleep(0.3)
+        pyautogui.press('tab')
+        time.sleep(0.3)
+        
+        # 全選並複製
+        pyautogui.hotkey('ctrl', 'a')
+        time.sleep(0.5)
+        pyautogui.hotkey('ctrl', 'c')
+        time.sleep(1.2)
+        
+        return pyperclip.paste()
+    
+    def _validate_response_content(self, response: str) -> bool:
+        """驗證複製的內容是否是有效的 Copilot 回應"""
+        if not response or len(response.strip()) < 30:
+            return False
+            
+        # 檢查是否包含典型的 Copilot 回應特徵
+        copilot_indicators = [
+            '分析', '建議', '程式', '代碼', 'code', 'function', 'class',
+            'import', 'def', 'var', 'let', 'const', '結構', '改進',
+            '範例', 'example', '可以', '建議', '應該', '可能', '需要',
+            '讓我', '我會', '以下', '首先', '接下來', '最後',
+            '```', 'python', 'javascript', 'typescript', 'html', 'css'
+        ]
+        
+        response_lower = response.lower()
+        matches = sum(1 for indicator in copilot_indicators if indicator in response_lower)
+        
+        # 如果匹配多個指標，可能是有效回應
+        return matches >= 2
     
     def copy_response(self) -> Optional[str]:
         """

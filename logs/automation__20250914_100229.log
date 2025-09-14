@@ -1,0 +1,41 @@
+2025-09-14 10:02:29,005 - ErrorHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,006 - ErrorHandler - INFO - 錯誤處理器初始化完成
+2025-09-14 10:02:29,011 - RetryHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,012 - RetryHandler - INFO - 重試處理器初始化完成
+2025-09-14 10:02:29,019 - RecoveryManager - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,032 - RecoveryManager - INFO - 恢復管理器初始化完成
+2025-09-14 10:02:29,045 - MainController - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,052 - ProjectManager - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,052 - ProjectManager - INFO - 專案管理器初始化 - 根目錄: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\projects
+2025-09-14 10:02:29,071 - VSCodeController - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,075 - VSCodeController - INFO - VS Code 控制器初始化完成，已記錄現有 VS Code PID: {1540, 3140, 4324, 7204, 392, 9416, 8124, 2444, 4780, 10236, 2740, 6396, 5340}
+2025-09-14 10:02:29,089 - ErrorHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,091 - ErrorHandler - INFO - 錯誤處理器初始化完成
+2025-09-14 10:02:29,107 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,108 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-14 10:02:29,117 - ImageRecognition - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,118 - ImageRecognition - INFO - 圖像辨識模組初始化完成
+2025-09-14 10:02:29,135 - RetryHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,136 - RetryHandler - INFO - 重試處理器初始化完成
+2025-09-14 10:02:29,147 - RecoveryManager - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_100229.log
+2025-09-14 10:02:29,149 - RecoveryManager - INFO - 恢復管理器初始化完成
+2025-09-14 10:02:29,150 - MainController - INFO - 混合式 UI 自動化腳本初始化完成
+2025-09-14 10:02:29,152 - MainController - INFO - ========================= 開始執行自動化腳本 ========================
+2025-09-14 10:02:30,533 - MainController - INFO - 使用者選擇啟用智能等待功能
+2025-09-14 10:02:30,536 - MainController - INFO - 執行前置檢查...
+2025-09-14 10:02:30,575 - ImageRecognition - INFO - 圖像識別已設為可選，跳過圖像檔案檢查
+2025-09-14 10:02:30,577 - VSCodeController - INFO - 確保乾淨的執行環境...
+2025-09-14 10:02:30,579 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-14 10:02:33,588 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-14 10:02:33,592 - MainController - INFO - ✅ 前置檢查完成
+2025-09-14 10:02:33,594 - ProjectManager - INFO - 開始掃描專案目錄...
+2025-09-14 10:02:33,778 - ProjectManager - INFO - 掃描完成，發現 3 個專案
+2025-09-14 10:02:33,783 - ProjectManager - INFO - 專案狀態載入完成
+2025-09-14 10:02:33,784 - MainController - INFO - 總共發現 3 個專案
+2025-09-14 10:02:33,784 - ProjectManager - INFO - 待處理專案數量: 0
+2025-09-14 10:02:33,785 - MainController - INFO - 所有專案都已處理完成
+2025-09-14 10:02:33,786 - MainController - INFO - 清理執行環境...
+2025-09-14 10:02:33,786 - VSCodeController - INFO - 確保乾淨的執行環境...
+2025-09-14 10:02:33,788 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-14 10:02:36,797 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-14 10:02:36,800 - MainController - INFO - ✅ 環境清理完成

@@ -23,19 +23,20 @@ class Config:
     # VS Code 相關設定
     VSCODE_EXECUTABLE = r"C:\Users\C250\AppData\Local\Programs\Microsoft VS Code\Code.exe"  # VS Code 可執行檔路徑
     VSCODE_STARTUP_DELAY = 5   # VS Code 啟動等待時間（秒）
+    VSCODE_STARTUP_TIMEOUT = 30  # VS Code 啟動超時時間（秒）
     VSCODE_COMMAND_DELAY = 1    # 命令執行間隔時間（秒）
     
     # Copilot Chat 相關設定
-    COPILOT_RESPONSE_TIMEOUT = 5   # Copilot 回應超時時間（秒）
+    COPILOT_RESPONSE_TIMEOUT = 90   # Copilot 回應超時時間（秒） - 增加到90秒
     COPILOT_CHECK_INTERVAL = 5      # 檢查回應完成間隔（秒）
     COPILOT_COPY_RETRY_MAX = 3      # 複製回應重試次數
     COPILOT_COPY_RETRY_DELAY = 2    # 複製重試間隔（秒）
     
     # 智能等待設定
     SMART_WAIT_ENABLED = True    # 是否啟用智能等待
-    SMART_WAIT_MAX_ATTEMPTS = 5  # 智能等待最大嘗試次數
-    SMART_WAIT_INTERVAL = 3      # 智能等待檢查間隔（秒）
-    SMART_WAIT_TIMEOUT = 60      # 智能等待最大時間（秒）
+    SMART_WAIT_MAX_ATTEMPTS = 30  # 智能等待最大嘗試次數 - 增加到30次
+    SMART_WAIT_INTERVAL = 2      # 智能等待檢查間隔（秒） - 減少到2秒提高響應性
+    SMART_WAIT_TIMEOUT = 90      # 智能等待最大時間（秒） - 與主超時時間保持一致
     
     # Copilot 記憶清除命令序列
     COPILOT_CLEAR_MEMORY_COMMANDS = [
@@ -47,15 +48,18 @@ class Config:
         {'type': 'key', 'key': 'escape', 'delay': 0.5},
     ]
     
-    # # 圖像辨識設定（現已可選）
-    # IMAGE_CONFIDENCE = 0.9  # 圖像匹配信心度
-    # SCREENSHOT_DELAY = 0.5  # 截圖間隔時間
-    # IMAGE_RECOGNITION_REQUIRED = False  # 是否強制要求圖像檔案
+    # 圖像辨識設定
+    IMAGE_CONFIDENCE = 0.9  # 圖像匹配信心度
+    SCREENSHOT_DELAY = 0.5  # 截圖間隔時間
+    IMAGE_RECOGNITION_REQUIRED = False  # 是否強制要求圖像檔案
     
-    # 圖像資源路徑
-    REGENERATE_BUTTON_IMAGE = ASSETS_DIR / "regenerate_button.png"
-    COPY_BUTTON_IMAGE = ASSETS_DIR / "copy_button.png"
-    COPILOT_INPUT_BOX_IMAGE = ASSETS_DIR / "copilot_input.png"
+    # 圖像資源路徑（更新後的版本）
+    STOP_BUTTON_IMAGE = ASSETS_DIR / "stop_button.png"        # Copilot 停止按鈕
+    SEND_BUTTON_IMAGE = ASSETS_DIR / "send_button.png"        # Copilot 發送按鈕
+    # 以下圖像不再使用，但保留以防需要
+    # REGENERATE_BUTTON_IMAGE = ASSETS_DIR / "regenerate_button.png"
+    # COPY_BUTTON_IMAGE = ASSETS_DIR / "copy_button.png"
+    # COPILOT_INPUT_BOX_IMAGE = ASSETS_DIR / "copilot_input.png"
     
     # 批次處理設定
     BATCH_SIZE = 100        # 每批處理專案數量

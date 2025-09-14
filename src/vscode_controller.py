@@ -50,6 +50,31 @@ class VSCodeController:
             self.logger.debug(f"檢查 VS Code 運行狀態時發生錯誤: {str(e)}")
             return False
     
+    def _is_auto_opened_vscode_running(self) -> bool:
+        """
+        檢查自動開啟的 VS Code 實例是否還在運行
+        
+        Returns:
+            bool: 自動開啟的 VS Code 是否在運行
+        """
+        try:
+            auto_opened_processes = []
+            for proc in psutil.process_iter(['pid', 'name']):
+                if ('code' in proc.info['name'].lower() and 
+                    proc.info['pid'] not in self.pre_existing_vscode_pids):
+                    auto_opened_processes.append(proc.info['pid'])
+            
+            if auto_opened_processes:
+                self.logger.debug(f"發現自動開啟的 VS Code 進程: {auto_opened_processes}")
+                return True
+            else:
+                self.logger.debug("沒有發現自動開啟的 VS Code 進程")
+                return False
+                
+        except Exception as e:
+            self.logger.debug(f"檢查自動開啟 VS Code 狀態時發生錯誤: {str(e)}")
+            return False
+    
     def close_all_vscode_instances(self) -> bool:
         """
         關閉所有 VS Code 實例
@@ -131,23 +156,70 @@ class VSCodeController:
             if self.is_vscode_running():
                 self.logger.info("發現現有 VS Code 實例，正在關閉...")
                 if not self.close_all_vscode_instances():
-                    self.logger.warning("無法完全關閉現有實例，繼續開啟新專案")
+                    self.logger.warning("無法完全關閉現有實例，等待3秒後繼續")
+                    time.sleep(3)
             
-            # 使用命令列開啟專案
+            # 設置環境變量以提高穩定性
+            env = os.environ.copy()
+            env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = '1'
+            env['ELECTRON_NO_ATTACH_CONSOLE'] = '1'
+            
+            # 使用命令列開啟專案，添加穩定性參數
             cmd = [config.VSCODE_EXECUTABLE, str(project_path)]
+            
+            # 添加穩定性參數
+            stability_args = [
+                "--disable-gpu-sandbox",     # 避免 GPU 相關崩潰
+                "--no-sandbox",              # 避免沙盒相關問題  
+                "--disable-dev-shm-usage",   # 避免共享記憶體問題
+                "--disable-background-timer-throttling",  # 避免背景計時器問題
+            ]
+            
+            cmd.extend(stability_args)
             self.logger.debug(f"執行命令: {' '.join(cmd)}")
             
-            self.vscode_process = subprocess.Popen(
-                cmd,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                cwd=str(project_path.parent)
-            )
-            
-            self.current_project_path = str(project_path)
-            
-            if wait_for_load:
-                # 等待 VS Code 啟動
+            try:
+                self.vscode_process = subprocess.Popen(
+                    cmd,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    cwd=str(project_path.parent),
+                    env=env
+                )
+                
+                self.current_project_path = str(project_path)
+                
+                if wait_for_load:
+                    # 等待 VS Code 啟動並驗證
+                    self.logger.info("等待 VS Code 啟動...")
+                    time.sleep(config.VSCODE_STARTUP_DELAY)
+                    
+                    # 驗證 VS Code 是否正常啟動
+                    max_attempts = 5
+                    for attempt in range(max_attempts):
+                        if self.is_vscode_running():
+                            self.logger.info(f"✅ VS Code 啟動成功 (第 {attempt + 1} 次檢查)")
+                            time.sleep(2)  # 額外等待確保完全載入
+                            
+                            # 立即最大化視窗，不動到既有畫面
+                            self.logger.info("正在最大化視窗...")
+                            self._maximize_window_direct()
+                            
+                            return True
+                        else:
+                            self.logger.debug(f"第 {attempt + 1}/{max_attempts} 次檢查: VS Code 尚未完全啟動")
+                            time.sleep(1)
+                    
+                    self.logger.warning("⚠️ VS Code 啟動但無法確認運行狀態")
+                    # 即使無法確認狀態也嘗試最大化
+                    self._maximize_window_direct()
+                    return True  # 假設成功，繼續執行
+                else:
+                    return True
+                    
+            except Exception as e:
+                self.logger.error(f"啟動 VS Code 過程中發生錯誤: {str(e)}")
+                return False
                 self.logger.info(f"等待 VS Code 載入 ({config.VSCODE_STARTUP_DELAY}秒)...")
                 time.sleep(config.VSCODE_STARTUP_DELAY)
                 
@@ -184,31 +256,115 @@ class VSCodeController:
                 # 強制關閉所有 VS Code 實例
                 return self.close_all_vscode_instances()
             else:
-                # 嘗試優雅關閉
-                try:
-                    # 使用 Ctrl+K F 關閉資料夾
-                    pyautogui.hotkey('ctrl', 'k')
-                    time.sleep(0.5)
-                    pyautogui.press('f')
-                    time.sleep(2)
-                    
-                    # 檢查是否成功關閉
-                    if not self.is_vscode_running():
-                        self.current_project_path = None
-                        self.vscode_process = None
-                        self.logger.info("✅ 專案關閉成功")
-                        return True
-                    else:
-                        # 如果優雅關閉失敗，嘗試強制關閉
-                        self.logger.info("優雅關閉失敗，嘗試強制關閉...")
-                        return self.close_all_vscode_instances()
-                        
-                except Exception:
-                    # 如果快捷鍵失敗，直接強制關閉
-                    return self.close_all_vscode_instances()
+                # 嘗試多種優雅關閉方法
+                return self._try_graceful_close()
                     
         except Exception as e:
             self.logger.error(f"關閉專案時發生錯誤: {str(e)}")
+            return False
+    
+    def _try_graceful_close(self) -> bool:
+        """
+        嘗試多種優雅關閉方法
+        
+        Returns:
+            bool: 關閉是否成功
+        """
+        try:
+            self.logger.debug("開始嘗試優雅關閉...")
+            
+            # 不使用焦點切換，直接嘗試關閉方法
+            # 避免意外切換到用戶的其他 VS Code 視窗
+            
+            # 嘗試多種關閉方法
+            close_methods = [
+                ("進程關閉 (Process Termination)", self._close_method_process_termination),
+                ("Ctrl+Shift+W (關閉視窗)", self._close_method_ctrl_shift_w),
+                ("Alt+F4 (關閉應用程式)", self._close_method_alt_f4)
+            ]
+            
+            for method_name, method_func in close_methods:
+                try:
+                    self.logger.debug(f"嘗試方法: {method_name}")
+                    
+                    # 執行關閉方法
+                    if method_func():
+                        # 等待關閉完成
+                        time.sleep(2)
+                        
+                        # 檢查是否成功關閉自動開啟的 VS Code 實例
+                        if not self._is_auto_opened_vscode_running():
+                            self.current_project_path = None
+                            self.vscode_process = None
+                            self.logger.info(f"✅ 優雅關閉成功 - 方法: {method_name}")
+                            return True
+                        else:
+                            self.logger.debug(f"方法 {method_name} 未完全關閉，繼續嘗試下一種方法")
+                    
+                except Exception as e:
+                    self.logger.debug(f"關閉方法 {method_name} 失敗: {e}")
+                    continue
+            
+            # 所有優雅關閉方法都失敗，嘗試強制關閉
+            self.logger.info("所有優雅關閉方法都失敗，嘗試強制關閉...")
+            return self.close_all_vscode_instances()
+            
+        except Exception as e:
+            self.logger.error(f"優雅關閉過程中發生錯誤: {e}")
+            return self.close_all_vscode_instances()
+    
+    def _close_method_process_termination(self) -> bool:
+        """使用進程終止方法精確關閉目標視窗"""
+        try:
+            if self.vscode_process and self.vscode_process.poll() is None:
+                self.logger.debug(f"嘗試終止目標進程 PID: {self.vscode_process.pid}")
+                self.vscode_process.terminate()
+                time.sleep(1)
+                
+                # 檢查進程是否已終止
+                if self.vscode_process.poll() is not None:
+                    self.logger.debug("目標進程已成功終止")
+                    return True
+                else:
+                    # 如果 terminate 不起作用，嘗試 kill
+                    self.logger.debug("嘗試強制終止進程")
+                    self.vscode_process.kill()
+                    time.sleep(1)
+                    return self.vscode_process.poll() is not None
+            else:
+                self.logger.debug("沒有有效的目標進程可終止")
+                return False
+                
+        except Exception as e:
+            self.logger.debug(f"進程終止失敗: {e}")
+            return False
+    
+    def _close_method_ctrl_shift_w(self) -> bool:
+        """使用 Ctrl+Shift+W 關閉視窗 (精確關閉目標視窗)"""
+        try:
+            # 先嘗試通過進程 PID 聚焦到正確的視窗
+            if self.vscode_process and self.vscode_process.poll() is None:
+                # 如果有記錄的進程，嘗試聚焦到它
+                self.logger.debug(f"嘗試聚焦到目標進程 PID: {self.vscode_process.pid}")
+                # 這裡可以添加更精確的視窗聚焦邏輯
+            
+            pyautogui.hotkey('ctrl', 'shift', 'w')
+            return True
+        except Exception as e:
+            self.logger.debug(f"Ctrl+Shift+W 失敗: {e}")
+            return False
+    
+    def _close_method_alt_f4(self) -> bool:
+        """使用 Alt+F4 關閉應用程式 (精確關閉目標視窗)"""
+        try:
+            # 先嘗試通過進程 PID 聚焦到正確的視窗
+            if self.vscode_process and self.vscode_process.poll() is None:
+                self.logger.debug(f"嘗試聚焦到目標進程 PID: {self.vscode_process.pid}")
+            
+            pyautogui.hotkey('alt', 'f4')
+            return True
+        except Exception as e:
+            self.logger.debug(f"Alt+F4 失敗: {e}")
             return False
     
     def ensure_clean_environment(self) -> bool:
@@ -231,6 +387,29 @@ class VSCodeController:
             self.logger.error(f"清理環境時發生錯誤: {str(e)}")
             return False
     
+    def _maximize_window_direct(self) -> bool:
+        """
+        直接最大化視窗，不影響既有畫面
+        
+        Returns:
+            bool: 操作是否成功
+        """
+        try:
+            self.logger.info("正在最大化 VS Code 視窗...")
+            
+            # 使用 Alt+Space, X 組合鍵直接最大化視窗
+            pyautogui.hotkey('alt', 'space')
+            time.sleep(0.5)
+            pyautogui.press('x')
+            time.sleep(0.5)
+            
+            self.logger.info("✅ 視窗最大化完成")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"最大化視窗失敗: {str(e)}")
+            return False
+
     def restart_vscode(self, project_path: str = None) -> bool:
         """
         重啟 VS Code

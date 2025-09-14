@@ -1,0 +1,9 @@
+2025-09-14 10:11:09,704 - HybridUIAutomation - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_101109.log
+2025-09-14 10:11:09,735 - VSCodeUIInitializer - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_101109.log
+2025-09-14 10:11:09,736 - VSCodeUIInitializer - INFO - VS Code UI 初始化器啟動
+2025-09-14 10:11:09,746 - VSCodeController - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_101109.log
+2025-09-14 10:11:09,770 - VSCodeController - INFO - VS Code 控制器初始化完成，已記錄現有 VS Code PID: {1540, 3140, 4324, 7204, 392, 9416, 8124, 2444, 4780, 10236, 2740, 6396, 5340}
+2025-09-14 10:11:09,909 - ImageRecognition - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_101109.log
+2025-09-14 10:11:09,910 - ImageRecognition - INFO - 圖像辨識模組初始化完成
+2025-09-14 10:11:09,916 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_101109.log
+2025-09-14 10:11:09,917 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成

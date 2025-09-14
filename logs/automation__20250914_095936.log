@@ -1,0 +1,20 @@
+2025-09-14 09:59:36,125 - HybridUIAutomation - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095936.log
+2025-09-14 09:59:36,205 - ProjectManager - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095936.log
+2025-09-14 09:59:36,205 - ProjectManager - INFO - 專案管理器初始化 - 根目錄: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\projects
+2025-09-14 09:59:36,787 - VSCodeUIInitializer - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095936.log
+2025-09-14 09:59:36,798 - VSCodeUIInitializer - INFO - VS Code UI 初始化器啟動
+2025-09-14 09:59:36,804 - VSCodeController - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095936.log
+2025-09-14 09:59:36,810 - VSCodeController - INFO - VS Code 控制器初始化完成，已記錄現有 VS Code PID: {11712, 1540, 3140, 4324, 7204, 392, 9416, 8124, 2444, 4780, 10236, 2740, 2036, 5428, 6396, 5340}
+2025-09-14 09:59:36,896 - ImageRecognition - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095936.log
+2025-09-14 09:59:36,899 - ImageRecognition - INFO - 圖像辨識模組初始化完成
+2025-09-14 09:59:36,911 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095936.log
+2025-09-14 09:59:36,912 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-14 09:59:42,266 - HybridUIAutomation - INFO - 🚀 開始處理專案: public-apis_AutoDeletion
+2025-09-14 09:59:42,267 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 開始處理專案
+2025-09-14 09:59:42,279 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 開啟 VS Code 專案
+2025-09-14 09:59:54,182 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 清除 Copilot Chat 記憶
+2025-09-14 09:59:58,055 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 處理 Copilot Chat (智能等待: 開啟)
+2025-09-14 10:01:43,748 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 驗證處理結果
+2025-09-14 10:01:43,751 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 智能關閉專案並清除記憶
+2025-09-14 10:01:50,495 - HybridUIAutomation - INFO - [public-apis_AutoDeletion] 專案處理完成
+2025-09-14 10:01:50,506 - HybridUIAutomation - INFO - ✅ 專案處理成功: public-apis_AutoDeletion (耗時: 128.25秒)

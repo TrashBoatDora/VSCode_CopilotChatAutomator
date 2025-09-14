@@ -1,0 +1,71 @@
+2025-09-14 09:51:19,486 - ImageRecognition - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095119.log
+2025-09-14 09:51:19,487 - ImageRecognition - INFO - 圖像辨識模組初始化完成
+2025-09-14 09:51:19,494 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095119.log
+2025-09-14 09:51:19,494 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-14 09:51:19,503 - TestMain - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095119.log
+2025-09-14 09:51:19,504 - TestMain - INFO - ============================================================
+2025-09-14 09:51:19,505 - TestMain - INFO - 自動化流程優化測試
+2025-09-14 09:51:19,506 - TestMain - INFO - ============================================================
+2025-09-14 09:51:19,507 - TestMain - INFO - 
+🔍 測試 1: 複製完整性檢查優化
+2025-09-14 09:51:19,522 - TestOptimizedCopy - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095119.log
+2025-09-14 09:51:19,525 - TestOptimizedCopy - INFO - 開始測試優化後的複製完整性檢查...
+2025-09-14 09:51:19,535 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095119.log
+2025-09-14 09:51:19,535 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-14 09:51:19,546 - ImageRecognition - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095119.log
+2025-09-14 09:51:19,548 - ImageRecognition - INFO - 圖像辨識模組初始化完成
+2025-09-14 09:51:19,548 - TestOptimizedCopy - INFO - 1. 測試圖像檢測狀態...
+2025-09-14 09:51:19,716 - ImageRecognition - INFO - 🔍✅ 圖像識別: stop_button.png - 找到 (信心度: 0.90)
+2025-09-14 09:51:19,717 - TestOptimizedCopy - INFO - Copilot 準備狀態: ❌ 未就緒
+2025-09-14 09:51:19,843 - ImageRecognition - INFO - 🔍✅ 圖像識別: stop_button.png - 找到 (信心度: 0.90)
+2025-09-14 09:51:19,960 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 09:51:19,963 - TestOptimizedCopy - INFO - 詳細狀態:
+2025-09-14 09:51:19,964 - TestOptimizedCopy - INFO -   - 有 stop 按鈕: True
+2025-09-14 09:51:19,966 - TestOptimizedCopy - INFO -   - 有 send 按鈕: False
+2025-09-14 09:51:19,966 - TestOptimizedCopy - INFO -   - 狀態訊息: Copilot 正在回應中（檢測到 stop 按鈕）
+2025-09-14 09:51:19,967 - TestOptimizedCopy - INFO - 2. 測試複製完整性檢查邏輯...
+2025-09-14 09:51:19,968 - TestOptimizedCopy - INFO -   短回應 (長度: 9): ❌ 不完整
+2025-09-14 09:51:19,969 - TestOptimizedCopy - INFO -   中等回應 (長度: 132): ✅ 完整
+2025-09-14 09:51:19,969 - TestOptimizedCopy - INFO -   長回應 (長度: 566): ✅ 完整
+2025-09-14 09:51:19,970 - TestOptimizedCopy - INFO -   程式碼回應 (長度: 78): ❌ 不完整
+2025-09-14 09:51:19,971 - TestOptimizedCopy - INFO -   未完成程式碼 (長度: 54): ❌ 不完整
+2025-09-14 09:51:19,972 - TestOptimizedCopy - INFO - ==================================================
+2025-09-14 09:51:19,973 - TestOptimizedCopy - INFO - 測試完成！
+2025-09-14 09:51:19,974 - TestOptimizedCopy - INFO - ✨ 優化重點:
+2025-09-14 09:51:19,974 - TestOptimizedCopy - INFO -   1. 降低穩定性檢查要求 (5次 → 2次)
+2025-09-14 09:51:19,975 - TestOptimizedCopy - INFO -   2. 縮短穩定時間要求 (5秒 → 3秒)
+2025-09-14 09:51:19,976 - TestOptimizedCopy - INFO -   3. 圖像檢測優先判斷完成
+2025-09-14 09:51:19,976 - TestOptimizedCopy - INFO -   4. 減少不必要的視窗操作
+2025-09-14 09:51:19,977 - TestMain - INFO - 
+🪟 測試 2: 視窗操作流程優化
+2025-09-14 09:51:19,987 - TestWindowOpt - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_095119.log
+2025-09-14 09:51:19,989 - TestWindowOpt - INFO - 開始測試視窗操作優化...
+2025-09-14 09:51:19,992 - TestWindowOpt - INFO - 📋 優化項目:
+2025-09-14 09:51:19,995 - TestWindowOpt - INFO -   1. ❌ 移除每次開啟前的重複視窗準備
+2025-09-14 09:51:19,996 - TestWindowOpt - INFO -   2. ❌ 減少不必要的 VS Code 實例關閉
+2025-09-14 09:51:19,996 - TestWindowOpt - INFO -   3. ✅ 在 VS Code 啟動參數中加入 --maximized
+2025-09-14 09:51:19,997 - TestWindowOpt - INFO -   4. ✅ 簡化 Copilot Chat 開啟前的視窗操作
+2025-09-14 09:51:19,998 - TestWindowOpt - INFO - 
+2025-09-14 09:51:19,999 - TestWindowOpt - INFO - 🔄 理想的專案處理流程:
+2025-09-14 09:51:20,001 - TestWindowOpt - INFO -   1. 檢查是否有現有的自動開啟實例
+2025-09-14 09:51:20,002 - TestWindowOpt - INFO -   2. 如有需要才關閉（不是每次都關閉）
+2025-09-14 09:51:20,002 - TestWindowOpt - INFO -   3. 開啟專案時直接最大化 (--maximized 參數)
+2025-09-14 09:51:20,003 - TestWindowOpt - INFO -   4. 處理完成後關閉專案
+2025-09-14 09:51:20,004 - TestWindowOpt - INFO -   5. 開啟下一個專案並自動最大化
+2025-09-14 09:51:20,005 - TestWindowOpt - INFO - 
+2025-09-14 09:51:20,006 - TestWindowOpt - INFO - ⚡ 效能改善預期:
+2025-09-14 09:51:20,006 - TestWindowOpt - INFO -   - 減少視窗操作時間 30-50%
+2025-09-14 09:51:20,007 - TestWindowOpt - INFO -   - 避免不必要的 VS Code 重啟
+2025-09-14 09:51:20,008 - TestWindowOpt - INFO -   - 更流暢的專案切換
+2025-09-14 09:51:20,009 - TestMain - INFO - 
+============================================================
+2025-09-14 09:51:20,010 - TestMain - INFO - 測試結果總結:
+2025-09-14 09:51:20,010 - TestMain - INFO -   複製邏輯優化: ✅ 通過
+2025-09-14 09:51:20,011 - TestMain - INFO -   視窗操作優化: ✅ 通過
+2025-09-14 09:51:20,012 - TestMain - INFO - 
+🎉 所有優化測試通過！
+2025-09-14 09:51:20,012 - TestMain - INFO - 💡 建議現在執行實際測試:
+2025-09-14 09:51:20,013 - TestMain - INFO -    python main.py
+2025-09-14 09:51:20,014 - TestMain - INFO -    觀察是否有效減少等待時間和視窗操作
+2025-09-14 09:51:20,014 - TestMain - INFO - 
+測試完成！

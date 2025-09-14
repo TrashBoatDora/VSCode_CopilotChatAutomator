@@ -1,0 +1,268 @@
+2025-09-14 10:34:23,060 - VSCodeUIInitializer - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,061 - VSCodeUIInitializer - INFO - VS Code UI 初始化器啟動
+2025-09-14 10:34:23,069 - VSCodeController - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,076 - VSCodeController - INFO - VS Code 控制器初始化完成，已記錄現有 VS Code PID: {2084, 4324, 7204, 9796, 392, 1704, 6076, 8124, 2444, 4140, 6172, 11052, 6992, 11816, 6396, 11576, 5020}
+2025-09-14 10:34:23,388 - ImageRecognition - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,393 - ImageRecognition - INFO - 圖像辨識模組初始化完成
+2025-09-14 10:34:23,416 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,418 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-14 10:34:23,544 - ErrorHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,545 - ErrorHandler - INFO - 錯誤處理器初始化完成
+2025-09-14 10:34:23,551 - RetryHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,551 - RetryHandler - INFO - 重試處理器初始化完成
+2025-09-14 10:34:23,560 - RecoveryManager - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,560 - RecoveryManager - INFO - 恢復管理器初始化完成
+2025-09-14 10:34:23,580 - MainController - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,603 - ProjectManager - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,608 - ProjectManager - INFO - 專案管理器初始化 - 根目錄: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\projects
+2025-09-14 10:34:23,621 - VSCodeController - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,625 - VSCodeController - INFO - VS Code 控制器初始化完成，已記錄現有 VS Code PID: {2084, 4324, 7204, 9796, 392, 1704, 6076, 8124, 2444, 4140, 6172, 11052, 6992, 11816, 6396, 11576, 5020}
+2025-09-14 10:34:23,640 - ErrorHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,648 - ErrorHandler - INFO - 錯誤處理器初始化完成
+2025-09-14 10:34:23,675 - CopilotHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,676 - CopilotHandler - INFO - Copilot Chat 處理器初始化完成
+2025-09-14 10:34:23,689 - ImageRecognition - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,701 - ImageRecognition - INFO - 圖像辨識模組初始化完成
+2025-09-14 10:34:23,718 - RetryHandler - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,720 - RetryHandler - INFO - 重試處理器初始化完成
+2025-09-14 10:34:23,740 - RecoveryManager - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_103423.log
+2025-09-14 10:34:23,743 - RecoveryManager - INFO - 恢復管理器初始化完成
+2025-09-14 10:34:23,744 - MainController - INFO - 混合式 UI 自動化腳本初始化完成
+2025-09-14 10:34:23,746 - MainController - INFO - ========================= 開始執行自動化腳本 ========================
+2025-09-14 10:34:28,291 - MainController - INFO - 使用者選擇執行專案狀態重置
+2025-09-14 10:34:28,631 - MainController - INFO - 使用者選擇啟用智能等待功能
+2025-09-14 10:34:28,632 - MainController - INFO - 執行前置檢查...
+2025-09-14 10:34:28,644 - ImageRecognition - INFO - 圖像識別已設為可選，跳過圖像檔案檢查
+2025-09-14 10:34:28,644 - VSCodeController - INFO - 確保乾淨的執行環境...
+2025-09-14 10:34:28,646 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-14 10:34:31,769 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-14 10:34:31,771 - MainController - INFO - ✅ 前置檢查完成
+2025-09-14 10:34:31,773 - ProjectManager - INFO - 開始掃描專案目錄...
+2025-09-14 10:34:31,903 - ProjectManager - INFO - 掃描完成，發現 3 個專案
+2025-09-14 10:34:31,910 - ProjectManager - INFO - 專案狀態載入完成
+2025-09-14 10:34:31,911 - MainController - INFO - 總共發現 3 個專案
+2025-09-14 10:34:31,912 - ProjectManager - INFO - 待處理專案數量: 3
+2025-09-14 10:34:31,913 - MainController - INFO - 待處理專案: 3 個
+2025-09-14 10:34:31,913 - ProjectManager - INFO - 待處理專案數量: 3
+2025-09-14 10:34:31,914 - ProjectManager - INFO - 專案分為 1 批，每批最多 100 個專案
+2025-09-14 10:34:31,915 - MainController - INFO - 將分 1 批處理
+2025-09-14 10:34:31,916 - MainController - INFO - ========================= 處理第 1/1 批 ========================
+2025-09-14 10:34:31,917 - MainController - INFO - 處理專案 1/3: public-apis_AutoDeletion
+2025-09-14 10:34:31,948 - RetryHandler - INFO - 嘗試執行 專案 public-apis_AutoDeletion (第 1/3 次)
+2025-09-14 10:34:31,952 - VSCodeController - INFO - 開啟專案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\projects\public-apis_AutoDeletion
+2025-09-14 10:34:31,953 - VSCodeController - INFO - 發現現有 VS Code 實例，正在關閉...
+2025-09-14 10:34:31,957 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-14 10:34:34,856 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-14 10:34:34,873 - VSCodeController - INFO - 等待 VS Code 啟動...
+2025-09-14 10:34:39,700 - VSCodeController - INFO - ✅ VS Code 啟動成功 (第 1 次檢查)
+2025-09-14 10:34:41,524 - VSCodeController - INFO - 正在最大化視窗...
+2025-09-14 10:34:41,526 - VSCodeController - INFO - 正在最大化 VS Code 視窗...
+2025-09-14 10:34:42,583 - VSCodeController - INFO - ✅ 視窗最大化完成
+2025-09-14 10:34:42,585 - VSCodeController - INFO - 開始清除 Copilot Chat 記憶...
+2025-09-14 10:34:45,904 - VSCodeController - INFO - ✅ Copilot Chat 記憶已清除
+2025-09-14 10:34:45,907 - CopilotHandler - INFO - ========================= 處理專案: public-apis_AutoDeletion ===
+2025-09-14 10:34:45,909 - CopilotHandler - INFO - 開啟 Copilot Chat...
+2025-09-14 10:34:48,609 - CopilotHandler - INFO - ✅ Copilot 開啟 Chat 面板
+2025-09-14 10:34:48,614 - CopilotHandler - INFO - 發送提示詞到 Copilot Chat...
+2025-09-14 10:34:51,918 - CopilotHandler - INFO - ✅ Copilot 發送提示詞 - 長度: 77 字元
+2025-09-14 10:34:51,921 - CopilotHandler - INFO - 等待 Copilot 回應 (超時: 90秒, 智能等待: 開啟)...
+2025-09-14 10:34:51,922 - CopilotHandler - INFO - 智能等待 Copilot 回應，最長等待 90 秒...
+2025-09-14 10:34:51,922 - CopilotHandler - INFO - 初始等待 3 秒，讓 Copilot 開始生成回應...
+2025-09-14 10:34:54,378 - ImageRecognition - INFO - 🔍✅ 圖像識別: stop_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:34:54,486 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:34:54,490 - CopilotHandler - INFO - 🔄 檢測到 stop 按鈕，Copilot 正在回應中...
+2025-09-14 10:35:00,326 - CopilotHandler - INFO - ✅ 檢測到 Copilot 開始回應
+2025-09-14 10:35:02,164 - ImageRecognition - INFO - 🔍✅ 圖像識別: stop_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:35:02,275 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:35:10,699 - ImageRecognition - INFO - 🔍✅ 圖像識別: stop_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:35:10,835 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:35:19,997 - ImageRecognition - INFO - 🔍✅ 圖像識別: stop_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:35:20,138 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:35:30,181 - ImageRecognition - INFO - 🔍✅ 圖像識別: stop_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:35:30,311 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:35:41,352 - ImageRecognition - INFO - 🔍✅ 圖像識別: stop_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:35:41,543 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:35:52,818 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:35:52,940 - ImageRecognition - INFO - 🔍✅ 圖像識別: send_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:35:52,942 - CopilotHandler - INFO - ✅ stop 按鈕消失，send 按鈕出現，Copilot 回應可能已完成
+2025-09-14 10:36:01,117 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:36:01,222 - ImageRecognition - INFO - 🔍✅ 圖像識別: send_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:36:03,377 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:36:03,497 - ImageRecognition - INFO - 🔍✅ 圖像識別: send_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:36:03,499 - CopilotHandler - INFO - ✅ stop 按鈕消失，send 按鈕出現，Copilot 回應可能已完成
+2025-09-14 10:36:10,820 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:36:10,938 - ImageRecognition - INFO - 🔍✅ 圖像識別: send_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:36:10,939 - CopilotHandler - INFO - 🎉 Copilot 回應確認完成！（圖像檢測優先）
+2025-09-14 10:36:10,939 - CopilotHandler - INFO -   - 等待時間: 78.8秒
+2025-09-14 10:36:10,940 - CopilotHandler - INFO -   - 穩定檢查: 2 次
+2025-09-14 10:36:10,941 - CopilotHandler - INFO -   - 穩定時間: 20.3秒
+2025-09-14 10:36:10,942 - CopilotHandler - INFO -   - 回應長度: 5207 字元
+2025-09-14 10:36:10,942 - CopilotHandler - INFO -   - 圖像確認: ✅ 通過
+2025-09-14 10:36:10,943 - CopilotHandler - INFO -   - 完成條件: 圖像檢測確認
+2025-09-14 10:36:10,944 - CopilotHandler - INFO - 複製 Copilot 回應 (第 1/3 次)...
+2025-09-14 10:36:17,207 - CopilotHandler - INFO - ✅ Copilot 複製回應 - 長度: 5207 字元
+2025-09-14 10:36:17,214 - CopilotHandler - INFO - 儲存回應到: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\ExecutionResult\Success\public-apis_AutoDeletion_Copilot_AutoComplete_20250914_103617.md
+2025-09-14 10:36:17,223 - CopilotHandler - INFO - ✅ Copilot 儲存回應 - 檔案: public-apis_AutoDeletion_Copilot_AutoComplete_20250914_103617.md
+2025-09-14 10:36:17,224 - CopilotHandler - INFO - ✅ Copilot 專案處理完成 - public-apis_AutoDeletion
+2025-09-14 10:36:17,235 - MainController - INFO - 使用智能等待模式，進行最後確認...
+2025-09-14 10:36:17,238 - MainController - INFO - 最後確認 Copilot 回應...
+2025-09-14 10:36:17,240 - CopilotHandler - INFO - 複製 Copilot 回應 (第 1/3 次)...
+2025-09-14 10:36:23,150 - CopilotHandler - INFO - ✅ Copilot 複製回應 - 長度: 5207 字元
+2025-09-14 10:36:23,152 - MainController - INFO - ✅ 確認收到完整回應 (5207 字元)
+2025-09-14 10:36:23,154 - MainController - INFO - 等待 3 秒確保所有操作完成...
+2025-09-14 10:36:25,634 - VSCodeController - INFO - 關閉專案: public-apis_AutoDeletion
+2025-09-14 10:36:27,406 - VSCodeController - INFO - ✅ 優雅關閉成功 - 方法: Ctrl+Shift+W (關閉視窗)
+2025-09-14 10:36:27,409 - RetryHandler - INFO - ✅ 專案 public-apis_AutoDeletion 執行成功
+2025-09-14 10:36:29,122 - MainController - INFO - 處理專案 2/3: sample_project
+2025-09-14 10:36:29,162 - RetryHandler - INFO - 嘗試執行 專案 sample_project (第 1/3 次)
+2025-09-14 10:36:29,166 - VSCodeController - INFO - 開啟專案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\projects\sample_project
+2025-09-14 10:36:29,167 - VSCodeController - INFO - 發現現有 VS Code 實例，正在關閉...
+2025-09-14 10:36:29,168 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-14 10:36:31,899 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-14 10:36:31,911 - VSCodeController - INFO - 等待 VS Code 啟動...
+2025-09-14 10:36:36,473 - VSCodeController - INFO - ✅ VS Code 啟動成功 (第 1 次檢查)
+2025-09-14 10:36:38,353 - VSCodeController - INFO - 正在最大化視窗...
+2025-09-14 10:36:38,354 - VSCodeController - INFO - 正在最大化 VS Code 視窗...
+2025-09-14 10:36:39,572 - VSCodeController - INFO - ✅ 視窗最大化完成
+2025-09-14 10:36:39,575 - VSCodeController - INFO - 開始清除 Copilot Chat 記憶...
+2025-09-14 10:36:43,429 - VSCodeController - INFO - ✅ Copilot Chat 記憶已清除
+2025-09-14 10:36:43,432 - CopilotHandler - INFO - ========================= 處理專案: sample_project =============
+2025-09-14 10:36:43,432 - CopilotHandler - INFO - 開啟 Copilot Chat...
+2025-09-14 10:36:46,538 - CopilotHandler - INFO - ✅ Copilot 開啟 Chat 面板
+2025-09-14 10:36:46,547 - CopilotHandler - INFO - 發送提示詞到 Copilot Chat...
+2025-09-14 10:36:50,975 - CopilotHandler - INFO - ✅ Copilot 發送提示詞 - 長度: 77 字元
+2025-09-14 10:36:50,979 - CopilotHandler - INFO - 等待 Copilot 回應 (超時: 90秒, 智能等待: 開啟)...
+2025-09-14 10:36:50,980 - CopilotHandler - INFO - 智能等待 Copilot 回應，最長等待 90 秒...
+2025-09-14 10:36:50,981 - CopilotHandler - INFO - 初始等待 3 秒，讓 Copilot 開始生成回應...
+2025-09-14 10:36:54,384 - ImageRecognition - INFO - 🔍✅ 圖像識別: stop_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:36:54,594 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:36:54,597 - CopilotHandler - INFO - 🔄 檢測到 stop 按鈕，Copilot 正在回應中...
+2025-09-14 10:37:03,006 - CopilotHandler - INFO - ✅ 檢測到 Copilot 開始回應
+2025-09-14 10:37:05,579 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:05,731 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:16,280 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:16,401 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:24,000 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:24,109 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:26,200 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:26,314 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:33,348 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:33,445 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:35,322 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:35,438 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:41,646 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:41,743 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:43,437 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:43,518 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:43,520 - CopilotHandler - INFO - ⏱️ 已等待 50 秒 (有內容, 長度: 483, UI狀態: 不明)
+2025-09-14 10:37:43,605 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:43,688 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:49,513 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:49,606 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:51,434 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:51,527 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:57,935 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:37:58,062 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:37:58,064 - CopilotHandler - INFO - 🎉 Copilot 回應確認完成！（文本檢查）
+2025-09-14 10:37:58,065 - CopilotHandler - INFO -   - 等待時間: 66.9秒
+2025-09-14 10:37:58,066 - CopilotHandler - INFO -   - 穩定檢查: 5 次
+2025-09-14 10:37:58,067 - CopilotHandler - INFO -   - 穩定時間: 43.9秒
+2025-09-14 10:37:58,068 - CopilotHandler - INFO -   - 回應長度: 483 字元
+2025-09-14 10:37:58,069 - CopilotHandler - INFO -   - 內容完整性: ✅ 通過
+2025-09-14 10:37:58,069 - CopilotHandler - INFO -   - 完成條件: 文本檢查通過
+2025-09-14 10:37:58,070 - CopilotHandler - INFO - 複製 Copilot 回應 (第 1/3 次)...
+2025-09-14 10:38:04,581 - CopilotHandler - INFO - ✅ Copilot 複製回應 - 長度: 483 字元
+2025-09-14 10:38:04,584 - CopilotHandler - INFO - 儲存回應到: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\ExecutionResult\Success\sample_project_Copilot_AutoComplete_20250914_103804.md
+2025-09-14 10:38:04,588 - CopilotHandler - INFO - ✅ Copilot 儲存回應 - 檔案: sample_project_Copilot_AutoComplete_20250914_103804.md
+2025-09-14 10:38:04,588 - CopilotHandler - INFO - ✅ Copilot 專案處理完成 - sample_project
+2025-09-14 10:38:04,596 - MainController - INFO - 使用智能等待模式，進行最後確認...
+2025-09-14 10:38:04,597 - MainController - INFO - 最後確認 Copilot 回應...
+2025-09-14 10:38:04,599 - CopilotHandler - INFO - 複製 Copilot 回應 (第 1/3 次)...
+2025-09-14 10:38:11,552 - CopilotHandler - INFO - ✅ Copilot 複製回應 - 長度: 483 字元
+2025-09-14 10:38:11,555 - MainController - INFO - ✅ 確認收到完整回應 (483 字元)
+2025-09-14 10:38:11,557 - MainController - INFO - 等待 3 秒確保所有操作完成...
+2025-09-14 10:38:14,728 - VSCodeController - INFO - 關閉專案: sample_project
+2025-09-14 10:38:16,974 - VSCodeController - INFO - ✅ 優雅關閉成功 - 方法: Ctrl+Shift+W (關閉視窗)
+2025-09-14 10:38:16,976 - RetryHandler - INFO - ✅ 專案 sample_project 執行成功
+2025-09-14 10:38:19,291 - MainController - INFO - 處理專案 3/3: sample_project_2
+2025-09-14 10:38:19,319 - RetryHandler - INFO - 嘗試執行 專案 sample_project_2 (第 1/3 次)
+2025-09-14 10:38:19,327 - VSCodeController - INFO - 開啟專案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\projects\sample_project_2
+2025-09-14 10:38:19,330 - VSCodeController - INFO - 發現現有 VS Code 實例，正在關閉...
+2025-09-14 10:38:19,333 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-14 10:38:22,825 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-14 10:38:22,838 - VSCodeController - INFO - 等待 VS Code 啟動...
+2025-09-14 10:38:28,652 - VSCodeController - INFO - ✅ VS Code 啟動成功 (第 1 次檢查)
+2025-09-14 10:38:31,212 - VSCodeController - INFO - 正在最大化視窗...
+2025-09-14 10:38:31,214 - VSCodeController - INFO - 正在最大化 VS Code 視窗...
+2025-09-14 10:38:32,761 - VSCodeController - INFO - ✅ 視窗最大化完成
+2025-09-14 10:38:32,765 - VSCodeController - INFO - 開始清除 Copilot Chat 記憶...
+2025-09-14 10:38:37,653 - VSCodeController - INFO - ✅ Copilot Chat 記憶已清除
+2025-09-14 10:38:37,659 - CopilotHandler - INFO - ========================= 處理專案: sample_project_2 ===========
+2025-09-14 10:38:37,661 - CopilotHandler - INFO - 開啟 Copilot Chat...
+2025-09-14 10:38:41,628 - CopilotHandler - INFO - ✅ Copilot 開啟 Chat 面板
+2025-09-14 10:38:41,643 - CopilotHandler - INFO - 發送提示詞到 Copilot Chat...
+2025-09-14 10:38:46,420 - CopilotHandler - INFO - ✅ Copilot 發送提示詞 - 長度: 77 字元
+2025-09-14 10:38:46,422 - CopilotHandler - INFO - 等待 Copilot 回應 (超時: 90秒, 智能等待: 開啟)...
+2025-09-14 10:38:46,423 - CopilotHandler - INFO - 智能等待 Copilot 回應，最長等待 90 秒...
+2025-09-14 10:38:46,424 - CopilotHandler - INFO - 初始等待 3 秒，讓 Copilot 開始生成回應...
+2025-09-14 10:38:50,015 - ImageRecognition - INFO - 🔍✅ 圖像識別: stop_button.png - 找到 (信心度: 0.90)
+2025-09-14 10:38:50,147 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:38:50,150 - CopilotHandler - INFO - 🔄 檢測到 stop 按鈕，Copilot 正在回應中...
+2025-09-14 10:38:57,875 - CopilotHandler - INFO - ✅ 檢測到 Copilot 開始回應
+2025-09-14 10:39:00,267 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:39:00,678 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:39:09,733 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:39:09,849 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:39:17,892 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:39:17,987 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:39:25,258 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:39:25,349 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:39:32,653 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:39:32,738 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:39:40,757 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:39:40,886 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:39:49,633 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:39:49,753 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:39:59,297 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:39:59,430 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:39:59,432 - CopilotHandler - INFO - ⏱️ 已等待 70 秒 (有內容, 長度: 1370, UI狀態: 不明)
+2025-09-14 10:39:59,583 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:39:59,708 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:40:10,187 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 10:40:10,341 - ImageRecognition - INFO - 🔍❌ 圖像識別: send_button.png - 未找到
+2025-09-14 10:40:21,216 - CopilotHandler - WARNING - ⏰ 智能等待超時 (90秒)
+2025-09-14 10:40:21,218 - CopilotHandler - WARNING - 💾 超時但有部分內容，嘗試使用現有回應
+2025-09-14 10:40:21,220 - CopilotHandler - INFO - 複製 Copilot 回應 (第 1/3 次)...
+2025-09-14 10:40:28,586 - CopilotHandler - INFO - ✅ Copilot 複製回應 - 長度: 2182 字元
+2025-09-14 10:40:28,596 - CopilotHandler - INFO - 儲存回應到: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\ExecutionResult\Success\sample_project_2_Copilot_AutoComplete_20250914_104028.md
+2025-09-14 10:40:28,614 - CopilotHandler - INFO - ✅ Copilot 儲存回應 - 檔案: sample_project_2_Copilot_AutoComplete_20250914_104028.md
+2025-09-14 10:40:28,618 - CopilotHandler - INFO - ✅ Copilot 專案處理完成 - sample_project_2
+2025-09-14 10:40:28,630 - MainController - INFO - 使用智能等待模式，進行最後確認...
+2025-09-14 10:40:28,632 - MainController - INFO - 最後確認 Copilot 回應...
+2025-09-14 10:40:28,633 - CopilotHandler - INFO - 複製 Copilot 回應 (第 1/3 次)...
+2025-09-14 10:40:35,474 - CopilotHandler - INFO - ✅ Copilot 複製回應 - 長度: 2182 字元
+2025-09-14 10:40:35,476 - MainController - INFO - ✅ 確認收到完整回應 (2182 字元)
+2025-09-14 10:40:35,477 - MainController - INFO - 等待 3 秒確保所有操作完成...
+2025-09-14 10:40:38,432 - VSCodeController - INFO - 關閉專案: sample_project_2
+2025-09-14 10:40:40,606 - VSCodeController - INFO - ✅ 優雅關閉成功 - 方法: Ctrl+Shift+W (關閉視窗)
+2025-09-14 10:40:40,610 - RetryHandler - INFO - ✅ 專案 sample_project_2 執行成功
+2025-09-14 10:40:42,394 - MainController - INFO - 第 1 批完成: 成功 3, 失敗 0, 耗時 370.5秒
+2025-09-14 10:40:42,395 - ProjectManager - INFO - 需要重試的專案數量: 0
+2025-09-14 10:40:42,396 - MainController - INFO - 沒有需要重試的專案
+2025-09-14 10:40:42,397 - MainController - INFO - ========================= 執行完成摘要 ===========================
+2025-09-14 10:40:42,398 - MainController - INFO - 📊 批次處理完成:
+2025-09-14 10:40:42,399 - MainController - INFO -    總專案數: 3
+2025-09-14 10:40:42,400 - MainController - INFO -    成功: 3
+2025-09-14 10:40:42,408 - MainController - INFO -    失敗: 0
+2025-09-14 10:40:42,409 - MainController - INFO -    成功率: 100.0%
+2025-09-14 10:40:42,409 - MainController - INFO -    總耗時: 378.65秒
+2025-09-14 10:40:42,409 - ProjectManager - INFO - 已完成專案數量: 3
+2025-09-14 10:40:42,410 - ProjectManager - INFO - 失敗專案數量: 0
+2025-09-14 10:40:42,410 - ProjectManager - INFO - 待處理專案數量: 0
+2025-09-14 10:40:42,418 - ProjectManager - INFO - 摘要報告已儲存: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\ExecutionResult\AutomationReport\automation_report_20250914_104042.json
+2025-09-14 10:40:42,420 - MainController - INFO - 詳細報告已儲存: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\ExecutionResult\AutomationReport\automation_report_20250914_104042.json
+2025-09-14 10:40:42,421 - MainController - INFO - 清理執行環境...
+2025-09-14 10:40:42,424 - VSCodeController - INFO - 確保乾淨的執行環境...
+2025-09-14 10:40:42,427 - VSCodeController - INFO - 關閉自動開啟的 VS Code 實例...
+2025-09-14 10:40:45,091 - VSCodeController - INFO - ✅ 自動開啟的 VS Code 實例已關閉
+2025-09-14 10:40:45,095 - MainController - INFO - ✅ 環境清理完成

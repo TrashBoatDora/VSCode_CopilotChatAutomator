@@ -1,0 +1,26 @@
+2025-09-14 09:25:01,828 - HybridUIAutomation - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_092501.log
+2025-09-14 09:25:01,834 - ImageRecognition - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_092501.log
+2025-09-14 09:25:01,834 - ImageRecognition - INFO - 圖像辨識模組初始化完成
+2025-09-14 09:25:01,840 - TestDetection - INFO - 日誌系統初始化完成 - 檔案: Y:\New_VSCode_Hybrid UI Automation Script\VSCode_CopilotChatAutomator\logs\automation__20250914_092501.log
+2025-09-14 09:25:01,840 - TestDetection - INFO - 開始測試新的圖像檢測機制...
+2025-09-14 09:25:01,851 - TestDetection - INFO - 1. 測試圖像資源驗證...
+2025-09-14 09:25:01,852 - ImageRecognition - INFO - 圖像識別已設為可選，跳過圖像檔案檢查
+2025-09-14 09:25:01,853 - TestDetection - INFO - ✅ 圖像資源驗證通過
+2025-09-14 09:25:01,854 - TestDetection - INFO - 2. 測試基本檢測方法...
+2025-09-14 09:25:01,995 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 09:25:02,108 - ImageRecognition - INFO - 🔍✅ 圖像識別: send_button.png - 找到 (信心度: 0.90)
+2025-09-14 09:25:02,109 - TestDetection - INFO - Copilot 回應準備狀態: True
+2025-09-14 09:25:02,110 - TestDetection - INFO - 3. 測試詳細狀態檢測...
+2025-09-14 09:25:02,218 - ImageRecognition - INFO - 🔍❌ 圖像識別: stop_button.png - 未找到
+2025-09-14 09:25:02,344 - ImageRecognition - INFO - 🔍✅ 圖像識別: send_button.png - 找到 (信心度: 0.90)
+2025-09-14 09:25:02,346 - TestDetection - INFO - 詳細狀態:
+2025-09-14 09:25:02,347 - TestDetection - INFO -   - 有 stop 按鈕: False
+2025-09-14 09:25:02,348 - TestDetection - INFO -   - 有 send 按鈕: True
+2025-09-14 09:25:02,349 - TestDetection - INFO -   - 正在回應: False
+2025-09-14 09:25:02,350 - TestDetection - INFO -   - 回應準備就緒: True
+2025-09-14 09:25:02,351 - TestDetection - INFO -   - 狀態訊息: Copilot 回應已完成（檢測到 send 按鈕）
+2025-09-14 09:25:02,352 - TestDetection - INFO - 4. 測試完成！
+2025-09-14 09:25:02,353 - TestDetection - INFO - 如果看到圖像檢測錯誤，請確保:
+2025-09-14 09:25:02,354 - TestDetection - INFO -   - VS Code 已經開啟
+2025-09-14 09:25:02,354 - TestDetection - INFO -   - Copilot Chat 面板可見
+2025-09-14 09:25:02,355 - TestDetection - INFO -   - stop_button.png 和 send_button.png 圖像正確
