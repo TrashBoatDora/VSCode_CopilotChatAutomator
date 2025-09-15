@@ -228,9 +228,9 @@ class ImageRecognition:
             self.logger.debug(f"檢查 Copilot 回應狀態時發生錯誤: {str(e)}")
             return False
     
-    def check_copilot_response_status(self) -> dict:
+    def check_copilot_response_status_with_auto_clear(self) -> dict:
         """
-        詳細檢查 Copilot 回應狀態（用於智能等待）
+        檢查 Copilot 回應狀態，每次檢測不到按鈕時都自動清除通知
         
         Returns:
             dict: 包含詳細狀態信息的字典
@@ -241,7 +241,99 @@ class ImageRecognition:
                 'has_send_button': False,
                 'is_responding': False,
                 'is_ready': False,
-                'status_message': ''
+                'status_message': '',
+                'notifications_cleared': False
+            }
+            
+            # 檢查 stop 按鈕
+            stop_button = self.find_image_on_screen(
+                str(config.STOP_BUTTON_IMAGE),
+                confidence=config.IMAGE_CONFIDENCE
+            )
+            status['has_stop_button'] = bool(stop_button)
+            
+            # 檢查 send 按鈕
+            send_button = self.find_image_on_screen(
+                str(config.SEND_BUTTON_IMAGE),
+                confidence=config.IMAGE_CONFIDENCE
+            )
+            status['has_send_button'] = bool(send_button)
+            
+            # 如果同時檢測不到兩個按鈕，立即清除通知
+            if not status['has_stop_button'] and not status['has_send_button']:
+                self.logger.warning("⚠️ 同時檢測不到 stop 或 send 按鈕，執行通知清除")
+                
+                # 每次都嘗試清除通知
+                if self.clear_vscode_notifications():
+                    status['notifications_cleared'] = True
+                    
+                    # 清除通知後再次檢測
+                    time.sleep(1.5)  # 增加等待時間
+                    
+                    stop_button = self.find_image_on_screen(
+                        str(config.STOP_BUTTON_IMAGE),
+                        confidence=config.IMAGE_CONFIDENCE
+                    )
+                    send_button = self.find_image_on_screen(
+                        str(config.SEND_BUTTON_IMAGE),
+                        confidence=config.IMAGE_CONFIDENCE
+                    )
+                    
+                    status['has_stop_button'] = bool(stop_button)
+                    status['has_send_button'] = bool(send_button)
+            
+            # 判斷狀態
+            if status['has_stop_button']:
+                status['is_responding'] = True
+                status['is_ready'] = False
+                if status['notifications_cleared']:
+                    status['status_message'] = "清除通知後檢測到 stop 按鈕，Copilot 正在回應中"
+                else:
+                    status['status_message'] = "Copilot 正在回應中（檢測到 stop 按鈕）"
+            elif status['has_send_button']:
+                status['is_responding'] = False
+                status['is_ready'] = True
+                if status['notifications_cleared']:
+                    status['status_message'] = "清除通知後檢測到 send 按鈕，Copilot 回應已完成"
+                else:
+                    status['status_message'] = "Copilot 回應已完成（檢測到 send 按鈕）"
+            else:
+                status['is_responding'] = False
+                status['is_ready'] = False
+                if status['notifications_cleared']:
+                    status['status_message'] = "已清除通知但仍未檢測到 stop 或 send 按鈕"
+                else:
+                    status['status_message'] = "狀態不明確（未檢測到 stop 或 send 按鈕）"
+            
+            return status
+            
+        except Exception as e:
+            self.logger.debug(f"檢查 Copilot 回應詳細狀態時發生錯誤: {str(e)}")
+            return {
+                'has_stop_button': False,
+                'has_send_button': False,
+                'is_responding': False,
+                'is_ready': False,
+                'status_message': f'檢測錯誤: {str(e)}',
+                'notifications_cleared': False
+            }
+
+    def check_copilot_response_status(self) -> dict:
+        """
+        詳細檢查 Copilot 回應狀態（用於智能等待）
+        如果同時檢測不到 send_button 和 stop_button，會嘗試清除通知
+        
+        Returns:
+            dict: 包含詳細狀態信息的字典
+        """
+        try:
+            status = {
+                'has_stop_button': False,
+                'has_send_button': False,
+                'is_responding': False,
+                'is_ready': False,
+                'status_message': '',
+                'notifications_cleared': False
             }
             
             # 檢查 stop 按鈕
@@ -268,9 +360,44 @@ class ImageRecognition:
                 status['is_ready'] = True
                 status['status_message'] = "Copilot 回應已完成（檢測到 send 按鈕）"
             else:
-                status['is_responding'] = False
-                status['is_ready'] = False
-                status['status_message'] = "狀態不明確（未檢測到 stop 或 send 按鈕）"
+                # 同時檢測不到兩個按鈕，可能是通知遮擋
+                self.logger.warning("⚠️ 同時檢測不到 stop 或 send 按鈕，可能有通知遮擋 UI")
+                
+                # 嘗試清除通知
+                if self.clear_vscode_notifications():
+                    status['notifications_cleared'] = True
+                    
+                    # 清除通知後再次檢測
+                    time.sleep(1)  # 給一點時間讓 UI 更新
+                    
+                    stop_button = self.find_image_on_screen(
+                        str(config.STOP_BUTTON_IMAGE),
+                        confidence=config.IMAGE_CONFIDENCE
+                    )
+                    send_button = self.find_image_on_screen(
+                        str(config.SEND_BUTTON_IMAGE),
+                        confidence=config.IMAGE_CONFIDENCE
+                    )
+                    
+                    status['has_stop_button'] = bool(stop_button)
+                    status['has_send_button'] = bool(send_button)
+                    
+                    if status['has_stop_button']:
+                        status['is_responding'] = True
+                        status['is_ready'] = False
+                        status['status_message'] = "清除通知後檢測到 stop 按鈕，Copilot 正在回應中"
+                    elif status['has_send_button']:
+                        status['is_responding'] = False
+                        status['is_ready'] = True
+                        status['status_message'] = "清除通知後檢測到 send 按鈕，Copilot 回應已完成"
+                    else:
+                        status['is_responding'] = False
+                        status['is_ready'] = False
+                        status['status_message'] = "已清除通知但仍未檢測到 stop 或 send 按鈕"
+                else:
+                    status['is_responding'] = False
+                    status['is_ready'] = False
+                    status['status_message'] = "狀態不明確（未檢測到 stop 或 send 按鈕，通知清除失敗）"
             
             return status
             
@@ -281,9 +408,71 @@ class ImageRecognition:
                 'has_send_button': False,
                 'is_responding': False,
                 'is_ready': False,
-                'status_message': f'檢測錯誤: {str(e)}'
+                'status_message': f'檢測錯誤: {str(e)}',
+                'notifications_cleared': False
             }
     
+    def clear_vscode_notifications(self) -> bool:
+        """
+        清除 VS Code 通知
+        使用 Ctrl+Shift+P 開啟命令面板並執行 "Notifications: Clear All Notifications"
+        使用剪貼簿來避免中文輸入法干擾問題
+        
+        Returns:
+            bool: 清除操作是否成功
+        """
+        try:
+            self.logger.info("檢測到 UI 按鈕被通知遮擋，嘗試清除 VS Code 通知...")
+            
+            # 保存目前剪貼簿內容
+            import pyperclip
+            original_clipboard = ""
+            try:
+                original_clipboard = pyperclip.paste()
+            except:
+                pass
+            
+            # 使用 Ctrl+Shift+P 開啟命令面板
+            pyautogui.hotkey('ctrl', 'shift', 'p')
+            time.sleep(1.5)  # 增加等待時間確保命令面板開啟
+            
+            # 將清除通知的命令複製到剪貼簿
+            clear_command = "Notifications: Clear All Notifications"
+            pyperclip.copy(clear_command)
+            time.sleep(0.3)
+            
+            # 使用 Ctrl+V 貼上命令（避免中文輸入法問題）
+            pyautogui.hotkey('ctrl', 'v')
+            time.sleep(0.8)
+            
+            # 按下 Enter 執行命令
+            pyautogui.press('enter')
+            time.sleep(1)
+            
+            # 按 Esc 關閉命令面板（如果還開著）
+            pyautogui.press('escape')
+            time.sleep(0.5)
+            
+            # 恢復原始剪貼簿內容
+            try:
+                if original_clipboard:
+                    pyperclip.copy(original_clipboard)
+            except:
+                pass
+            
+            self.logger.info("✅ VS Code 通知清除命令已執行")
+            return True
+            
+        except Exception as e:
+            self.logger.error(f"清除 VS Code 通知時發生錯誤: {str(e)}")
+            # 嘗試按 Esc 關閉可能開啟的面板
+            try:
+                pyautogui.press('escape')
+                pyautogui.press('escape')  # 多按一次確保關閉
+            except:
+                pass
+            return False
+
     def click_copilot_copy_button(self) -> bool:
         """
         點擊 Copilot 的複製按鈕
@@ -419,3 +608,11 @@ def check_copilot_ready() -> bool:
 def validate_image_assets() -> bool:
     """驗證圖像資源的便捷函數"""
     return image_recognition.validate_required_images()
+
+def clear_notifications() -> bool:
+    """清除 VS Code 通知的便捷函數"""
+    return image_recognition.clear_vscode_notifications()
+
+def check_copilot_status_with_auto_clear() -> dict:
+    """檢查 Copilot 狀態並自動清除通知的便捷函數"""
+    return image_recognition.check_copilot_response_status_with_auto_clear()

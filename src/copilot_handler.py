@@ -173,7 +173,7 @@ class CopilotHandler:
     
     def _smart_wait_for_response(self, timeout: int) -> bool:
         """
-        智能等待 Copilot 回應完成 (確保回應真正完整)
+        簡化的智能等待 Copilot 回應完成 (只使用圖像辨識和穩定性檢查)
         
         Args:
             timeout: 超時時間（秒）
@@ -185,23 +185,21 @@ class CopilotHandler:
             self.logger.info(f"智能等待 Copilot 回應，最長等待 {timeout} 秒...")
             
             start_time = time.time()
-            check_interval = 2  # 增加檢查間隔，減少頻繁檢查
+            check_interval = 1.5  # 檢查間隔
             
-            # 初始化前一次的回應內容和穩定計數器
+            # 簡化的穩定性追蹤
             last_response = ""
             stable_count = 0
-            required_stable_count = 5  # 增加穩定檢查次數，確保真正完成
-            min_stable_time = 10  # 增加最小穩定時間
-            min_response_length = 200  # 最小回應長度，確保有實質內容
+            required_stable_count = 3  # 減少穩定檢查次數
+            min_response_length = 100  # 降低最小回應長度要求
             
             # 狀態追蹤
             first_content_detected = False
             last_change_time = start_time
-            regenerate_detected = False
             
-            # 最小等待時間，確保 Copilot 有時間開始回應
-            initial_wait = 3  # 減少初始等待時間，給更多時間做實際檢測
-            self.logger.info(f"初始等待 {initial_wait} 秒，讓 Copilot 開始生成回應...")
+            # 初始等待時間
+            initial_wait = 2
+            self.logger.info(f"初始等待 {initial_wait} 秒...")
             time.sleep(initial_wait)
             
             # 持續監控直到回應穩定
@@ -211,29 +209,39 @@ class CopilotHandler:
                     self.logger.warning("收到中斷請求，停止等待 Copilot 回應")
                     return False
                 
-                # 檢查 Copilot 回應狀態（使用新的 stop/send 按鈕檢測）
+                # 使用新的自動清除通知的狀態檢查
                 try:
-                    copilot_status = self.image_recognition.check_copilot_response_status()
+                    copilot_status = self.image_recognition.check_copilot_response_status_with_auto_clear()
                     
-                    if copilot_status['has_stop_button']:
-                        if not regenerate_detected:
-                            self.logger.info("🔄 檢測到 stop 按鈕，Copilot 正在回應中...")
-                            regenerate_detected = True
-                    elif copilot_status['has_send_button']:
-                        if regenerate_detected:
-                            self.logger.info("✅ stop 按鈕消失，send 按鈕出現，Copilot 回應可能已完成")
+                    # 如果清除了通知，記錄相關信息
+                    if copilot_status.get('notifications_cleared', False):
+                        self.logger.info("🔄 已清除 VS Code 通知，繼續檢測...")
+                    
+                    # 圖像檢測優先判斷
+                    if copilot_status['has_send_button'] and not copilot_status['has_stop_button']:
+                        # 檢測到 send 按鈕且沒有 stop 按鈕，認為回應完成
+                        self.logger.info("✅ 圖像檢測確認：Copilot 回應已完成（檢測到 send 按鈕）")
+                        
+                        # 嘗試獲取回應內容
+                        current_response = self._try_copy_response_without_logging()
+                        if current_response and len(current_response.strip()) >= min_response_length:
+                            self.last_response = current_response
+                            elapsed_time = time.time() - start_time
+                            self.logger.info(f"🎉 完成等待！(圖像檢測, {elapsed_time:.1f}秒, {len(current_response)}字元)")
+                            return True
                         else:
-                            self.logger.info("✅ 檢測到 send 按鈕，Copilot 可能已完成回應")
-                            regenerate_detected = True
+                            self.logger.debug("圖像檢測顯示完成，但內容長度不足，繼續等待...")
+                    
+                    elif copilot_status['has_stop_button']:
+                        self.logger.debug("🔄 檢測到 stop 按鈕，Copilot 正在回應中...")
                     
                     # 記錄詳細狀態
-                    self.logger.debug(f"Copilot 狀態: {copilot_status['status_message']}")
+                    self.logger.debug(f"狀態: {copilot_status['status_message']}")
                     
                 except Exception as e:
                     self.logger.debug(f"圖像檢測錯誤: {e}")
-                    # 如果圖像檢測失敗，繼續使用內容檢測
                 
-                # 嘗試複製回應內容
+                # 獲取並檢查回應內容穩定性
                 current_response = self._try_copy_response_without_logging()
                 elapsed_time = time.time() - start_time
                 
@@ -242,7 +250,7 @@ class CopilotHandler:
                         self.logger.info("✅ 檢測到 Copilot 開始回應")
                         first_content_detected = True
                     
-                    # 檢查內容是否與上次相同
+                    # 檢查內容穩定性
                     if current_response == last_response:
                         stable_count += 1
                         time_since_change = time.time() - last_change_time
@@ -251,54 +259,19 @@ class CopilotHandler:
                                         f"穩定時間: {time_since_change:.1f}秒, "
                                         f"長度: {len(current_response)} 字元")
                         
-                        # 檢查回應完整性（放寬條件）
-                        is_content_complete = self._check_response_completeness(current_response)
-                        is_length_sufficient = len(current_response) >= min_response_length
-                        is_time_stable = time_since_change >= min_stable_time
-                        
-                        # 檢查圖像狀態（是否有 send 按鈕且無 stop 按鈕）
-                        image_ready = False
-                        try:
-                            if self.image_recognition.check_copilot_response_ready():
-                                image_ready = True
-                                self.logger.debug("圖像檢測確認：Copilot 回應已完成")
-                        except Exception as e:
-                            self.logger.debug(f"圖像檢測失敗，跳過: {e}")
-                        
-                        # 優化的完成條件：優先使用圖像檢測結果
-                        if image_ready and stable_count >= 2 and is_length_sufficient:
-                            # 圖像檢測確認回應完成，降低其他條件要求
-                            self.logger.info(f"🎉 Copilot 回應確認完成！（圖像檢測優先）")
+                        # 簡化的完成條件：穩定次數 + 基本長度檢查
+                        if (stable_count >= required_stable_count and 
+                            len(current_response) >= min_response_length and
+                            time_since_change >= 3):  # 至少穩定3秒
+                            
+                            self.logger.info(f"🎉 內容穩定確認完成！")
                             self.logger.info(f"  - 等待時間: {elapsed_time:.1f}秒")
                             self.logger.info(f"  - 穩定檢查: {stable_count} 次")
                             self.logger.info(f"  - 穩定時間: {time_since_change:.1f}秒")
                             self.logger.info(f"  - 回應長度: {len(current_response)} 字元")
-                            self.logger.info(f"  - 圖像確認: ✅ 通過")
-                            self.logger.info(f"  - 完成條件: 圖像檢測確認")
                             
                             self.last_response = current_response
                             return True
-                        elif (stable_count >= required_stable_count and 
-                              is_content_complete and 
-                              is_length_sufficient and 
-                              is_time_stable):
-                            # 傳統完整條件檢查（作為備選方案）
-                            self.logger.info(f"🎉 Copilot 回應確認完成！（文本檢查）")
-                            self.logger.info(f"  - 等待時間: {elapsed_time:.1f}秒")
-                            self.logger.info(f"  - 穩定檢查: {stable_count} 次")
-                            self.logger.info(f"  - 穩定時間: {time_since_change:.1f}秒")
-                            self.logger.info(f"  - 回應長度: {len(current_response)} 字元")
-                            self.logger.info(f"  - 內容完整性: {'✅ 通過' if is_content_complete else '❌ 未通過'}")
-                            self.logger.info(f"  - 完成條件: 文本檢查通過")
-                            
-                            self.last_response = current_response
-                            return True
-                            
-                        # 如果只是時間穩定但內容不完整，給更多時間
-                        elif stable_count >= 3 and is_time_stable and not is_content_complete:
-                            self.logger.info("⚠️ 內容可能未完整，延長等待時間...")
-                            # 重置穩定計數但保持內容，繼續等待
-                            stable_count = max(1, stable_count - 2)
                             
                     else:
                         # 內容有變化
@@ -310,29 +283,30 @@ class CopilotHandler:
                     last_response = current_response
                     
                 elif first_content_detected:
-                    # 之前有內容，現在沒有，可能是複製失敗
                     self.logger.warning("⚠️ 無法複製到內容，可能是複製操作失敗")
                 else:
-                    # 還沒有檢測到任何內容
                     self.logger.debug(f"等待 Copilot 開始回應... ({elapsed_time:.1f}秒)")
                 
                 # 暫停後繼續檢查
                 time.sleep(check_interval)
                 
-                # 定期報告狀態
+                # 定期報告狀態（每10秒）
                 if int(elapsed_time) % 10 == 0 and int(elapsed_time) > 0:
                     status = "有內容" if current_response else "無內容"
                     
                     # 加入圖像檢測狀態
                     image_status = ""
                     try:
-                        copilot_status = self.image_recognition.check_copilot_response_status()
                         if copilot_status['has_stop_button']:
                             image_status = ", UI狀態: 回應中(stop)"
                         elif copilot_status['has_send_button']:
                             image_status = ", UI狀態: 完成(send)"
                         else:
                             image_status = ", UI狀態: 不明"
+                        
+                        if copilot_status.get('notifications_cleared', False):
+                            image_status += " (已清除通知)"
+                            
                     except:
                         image_status = ", UI狀態: 檢測失敗"
                     
@@ -354,54 +328,28 @@ class CopilotHandler:
             self.logger.error(f"智能等待時發生錯誤: {str(e)}")
             return False
             
-    def _check_response_completeness(self, response: str) -> bool:
+    def _is_response_basic_complete(self, response: str) -> bool:
         """
-        檢查回應是否看起來完整（簡化版本，減少誤判）
+        基本的回應完整性檢查（極簡版本）
         
         Args:
             response: Copilot 回應內容
             
         Returns:
-            bool: 回應是否看起來完整
+            bool: 回應是否基本完整
         """
-        # 如果回應為空或太短，明顯不完整
-        if not response or len(response) < 15:
+        # 基本長度檢查（降低要求）
+        if not response or len(response.strip()) < 10:
             return False
             
         # 只檢查最明顯的未完成標記
-        incomplete_markers = [
-            '```' if response.count('```') % 2 != 0 else None,  # 未閉合的程式碼區塊
-            '<function_calls>' if '<function_calls>' in response and '</function_calls>' not in response else None,  # 未閉合的 function_calls 標記
-        ]
+        if '```' in response and response.count('```') % 2 != 0:
+            return False  # 未閉合的程式碼區塊
         
-        # 移除 None 值
-        incomplete_markers = [marker for marker in incomplete_markers if marker is not None]
-        
-        if incomplete_markers:
-            self.logger.debug(f"偵測到未閉合標記: {incomplete_markers}")
-            return False
-        
-        # 簡化的未完成信號檢查（只檢查最明顯的）
-        incomplete_signals = [
-            "我正在分析",
-            "讓我",
-            "正在生成",
-            "loading...",
-            "請稍等"
-        ]
-        
-        response_lower = response.lower()
-        for signal in incomplete_signals:
-            if signal in response_lower and len(response) < 200:
-                self.logger.debug(f"偵測到 Copilot 仍在思考的訊號: '{signal}'")
-                return False
-        
-        # 檢查是否有明顯截斷的內容（但只檢查結尾）
-        if response.rstrip().endswith(('...', '。。。', '未完', '待續')):
-            self.logger.debug("偵測到明顯的截斷標記")
+        # 簡單的截斷檢查
+        if response.rstrip().endswith(('...', '。。。')):
             return False
                 
-        # 大部分情況下認為是完整的
         return True
     
     def _try_copy_response_without_logging(self) -> str:
